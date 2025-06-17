@@ -40,6 +40,7 @@ export default function Dashboard() {
                                 <TableHead>Images</TableHead>
                                 <TableHead>Description</TableHead>
                                 <TableHead>Date d'ajout</TableHead>
+                                <TableHead>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
