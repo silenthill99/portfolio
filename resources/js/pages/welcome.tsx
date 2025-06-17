@@ -18,7 +18,21 @@ export default function Welcome() {
             </Head>
             <main className={"container mx-auto text-white relative"}>
                 <h1 className={"text-5xl py-5 font-bold uppercase"}>Florian GRAZIANI</h1>
-                <p>Compétences actuelles : </p>
+                <div className={"grid grid-cols-2"}>
+                    <div>
+                        <h2>A propos</h2>
+                        <ul className={'list-disc list-inside'}>
+                            <li>Né le 11 Juillet 1999 a Annecy</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Parcours professionnel</h2>
+                        <ul className={'list-disc list-inside'}>
+                            <li>Janvier 2023 : Stage de 2 semaines chez DevCSI</li>
+                        </ul>
+                    </div>
+                </div>
+                <h2>Compétences actuelles : </h2>
                 <ul className={"list-disc list-inside"}>
                     <li>Java : Création de mods et de plugins pour Minecraft</li>
                     <li>

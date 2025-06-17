@@ -79,6 +79,10 @@
     h1 {
         @apply lg:text-5xl font-semibold py-5 leading-tight;
     }
+
+    h2 {
+        @apply lg:text-3xl font-semibold py-5 leading-tight;
+    }
 }
 
 :root {

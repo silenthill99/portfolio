@@ -1,4 +1,4 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 type ArticleProps = {
@@ -15,7 +15,7 @@ const Show = () => {
             <Head title={article.title} />
             <div className={'container mx-auto'}>
                 <h1>{article.title}</h1>
-                <Carousel className={"w-1/2"}>
+                <Carousel className={"lg:w-1/2"}>
                     <CarouselContent>
                         <CarouselItem>
                             <img src={`/storage/${article.path}`} alt=""  />
@@ -32,7 +32,8 @@ const Show = () => {
                     <CarouselNext className={"text-black"}/>
                 </Carousel>
                 <a href={article.link} target={'_blank'}>Lien du projet</a> <br />
-                <a href={article.github} target={'_blank'}>Lien github</a>
+                <a href={article.github} target={'_blank'}>Lien github</a> <br/>
+                <Link href={route('home')}>Retour à la page d'accueil</Link>
             </div>
         </div>
     );
