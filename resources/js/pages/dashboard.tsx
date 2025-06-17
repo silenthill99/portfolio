@@ -6,14 +6,18 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Tableau de bord',
         href: '/dashboard',
     },
 ];
 
 type ArticleProps = {
     id: number;
+    title: string;
     path: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export default function Dashboard() {
@@ -26,29 +30,45 @@ export default function Dashboard() {
                 <Button className={"self-start"} onClick={() => {
                     router.visit(route('create'))
                 }}>Créer un article</Button>
-                <Table>
-                    <TableCaption>Liste des projets</TableCaption>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Identifiant</TableHead>
-                            <TableHead>Images</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {articles.map((art) => (
+                {articles.length > 0 ? (
+                    <Table>
+                        <TableCaption>Liste des projets</TableCaption>
+                        <TableHeader>
                             <TableRow>
-                                <TableCell>
-                                    {art.id}
-                                </TableCell>
-                                <TableCell>
-                                    <img src={"storage/" + art.path} alt={art.path}/>
-                                </TableCell>
+                                <TableHead>Identifiant</TableHead>
+                                <TableHead>Titre</TableHead>
+                                <TableHead>Images</TableHead>
+                                <TableHead>Description</TableHead>
+                                <TableHead>Date d'ajout</TableHead>
                             </TableRow>
-                        ))}
-                        <TableRow>
-                        </TableRow>
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {articles.map((art) => (
+                                <TableRow>
+                                    <TableCell>
+                                        {art.id}
+                                    </TableCell>
+                                    <TableCell>
+                                        {art.title}
+                                    </TableCell>
+                                    <TableCell>
+                                        <img src={"storage/" + art.path} alt={art.path} className={"w-full h-40 object-cover"}/>
+                                    </TableCell>
+                                    <TableCell>
+                                        {art.description}
+                                    </TableCell>
+                                    <TableCell>
+                                        <span>{new Date(art.created_at).toLocaleString()}</span>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                            <TableRow>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                ) : (
+                    <p>Aucun articles disponibles</p>
+                )}
             </div>
         </AppLayout>
     );

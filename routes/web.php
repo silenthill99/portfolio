@@ -18,7 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/create', [ArticleController::class, 'create'])->name('create');
 
-Route::post('/create', [ArticleController::class, "create_submit"])->name('create.submit');
+Route::post('/create', [ArticleController::class, "store"])->name('create.submit');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

@@ -13,7 +13,7 @@ class ArticleController extends Controller
         return Inertia::render('create');
     }
 
-    public function create_submit(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             "title" => "required|string|max:255",
