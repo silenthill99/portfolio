@@ -35,4 +35,35 @@ class ArticleController extends Controller
 
         return redirect()->route('home')->with('success', 'Article créé avec succès.');
     }
+
+    public function edit(Article $article)
+    {
+        return Inertia::render('update', [
+            'article' => $article
+        ]);
+    }
+
+    public function update(Article $article, Request $request)
+    {
+        $validated = $request->validate([
+            "title" => "required|string|max:255",
+            "link" => "required|string|max:255",
+            "image" => "nullable|image|max:8000",
+            "description" => "required|string"
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $validated['path'] = $image->storeAs('images', $imageName, 'public');
+        }
+
+        $article->update($validated);
+        return redirect()->route('dashboard')->with('success', 'Article mis à jour.');
+    }
+
+    public function destroy(Article $article) {
+        $article->delete();
+        return redirect()->route('dashboard')->with('success', 'Article supprimé.');
+    }
 }

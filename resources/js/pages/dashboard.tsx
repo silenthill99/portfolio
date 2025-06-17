@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, router, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
@@ -60,6 +60,13 @@ export default function Dashboard() {
                                     </TableCell>
                                     <TableCell>
                                         <span>{new Date(art.created_at).toLocaleString()}</span>
+                                    </TableCell>
+                                    <TableCell>
+                                        <ul className={"flex gap-2"}>
+                                            <Link href={""} className={"hover:underline"}>Voir</Link>
+                                            <Link href={route("update", art)} className={"hover:underline"}>Modifier</Link>
+                                            <button onClick={() => router.delete(route("article.destroy", 1))} className={"hover:underline"}>Supprimer</button>
+                                        </ul>
                                     </TableCell>
                                 </TableRow>
                             ))}

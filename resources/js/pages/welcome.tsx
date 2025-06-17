@@ -1,11 +1,16 @@
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
+type ArticleProps = {
+    title: string;
+    path: string;
+}
+
 export default function Welcome() {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, articles } = usePage<SharedData & {articles: ArticleProps[]}>().props;
 
     return (
-        <div className={"h-screen bg-gray-800"}>
+        <div className={"min-h-screen bg-gray-800"}>
             <Head title="Page d'accueil">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -26,6 +31,20 @@ export default function Welcome() {
                     </li>
                 </ul>
                 <Link href={route('dashboard')} className={"absolute top-5 right-5"}>Page administrateur</Link>
+
+                <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>
+                <div className={"grid md:grid-cols-2 lg:grid-cols-3 gap-10 p-10 lg:p-0"}>
+                    {articles.map((article) => (
+                        <div className={"rounded-3xl bg-white"}>
+                            <figure>
+                                <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl"}/>
+                                <figcaption className={"text-black p-5"}>
+                                    <h3 className={"uppercase font-semibold text-2xl"}>{article.title}</h3>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    ))}
+                </div>
             </main>
         </div>
     );
