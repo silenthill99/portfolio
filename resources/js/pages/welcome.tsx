@@ -2,12 +2,13 @@ import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 type ArticleProps = {
+    id: number;
     title: string;
     path: string;
 }
 
 export default function Welcome() {
-    const { auth, articles } = usePage<SharedData & {articles: ArticleProps[]}>().props;
+    const { articles } = usePage<SharedData & { articles: ArticleProps[] }>().props;
 
     return (
         <div className={"min-h-screen bg-gray-800"}>
@@ -16,7 +17,7 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <main className={"container mx-auto text-white relative"}>
-                <h1 className={"text-5xl py-5 font-bold uppercase"}>Mon portfolio</h1>
+                <h1 className={"text-5xl py-5 font-bold uppercase"}>Florian GRAZIANI</h1>
                 <p>Compétences actuelles : </p>
                 <ul className={"list-disc list-inside"}>
                     <li>Java : Création de mods et de plugins pour Minecraft</li>
@@ -30,19 +31,17 @@ export default function Welcome() {
                         </ul>
                     </li>
                 </ul>
-                <Link href={route('dashboard')} className={"absolute top-5 right-5"}>Page administrateur</Link>
 
                 <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>
                 <div className={"grid md:grid-cols-2 lg:grid-cols-3 gap-10 p-10 lg:p-0"}>
                     {articles.map((article) => (
-                        <div className={"rounded-3xl bg-white"}>
-                            <figure>
-                                <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl"}/>
-                                <figcaption className={"text-black p-5"}>
-                                    <h3 className={"uppercase font-semibold text-2xl"}>{article.title}</h3>
-                                </figcaption>
-                            </figure>
-                        </div>
+                        <figure key={article.id} className={"rounded-3xl bg-white h-100 flex flex-col shadow-2xs"}>
+                            <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl w-full h-7/10 object-cover"} />
+                            <figcaption className={"text-black px-5 flex flex-col justify-between grow pb-5"}>
+                                <h3 className={"uppercase font-semibold text-2xl"}>{article.title}</h3>
+                                <Link href={route("article.show", article)} className={"hover:underline"}>En voir plus</Link>
+                            </figcaption>
+                        </figure>
                     ))}
                 </div>
             </main>

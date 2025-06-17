@@ -27,5 +27,7 @@ Route::get("/update/{article}", [ArticleController::class, "edit"])->name("updat
 Route::post("/update/{article}", [ArticleController::class, "update"])->name('update.submit');
 
 Route::delete("/delete/{article}", [ArticleController::class, "destroy"])->name('article.destroy');
+
+Route::get("/show/{article}", [ArticleController::class, "show"])->name("article.show");
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

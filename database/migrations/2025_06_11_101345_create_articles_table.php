@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('link');
+            $table->string('github');
             $table->string('path');
             $table->text('description');
             $table->timestamps();

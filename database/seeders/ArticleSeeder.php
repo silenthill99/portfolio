@@ -11,10 +11,11 @@ class ArticleSeeder extends Seeder
     {
 
         DB::table('articles')->insert([
-            'title' => "Spy x family",
-            "link" => "Essai",
-            "path" => "images/1750147289_Spy family 1.jpg",
-            'description' => "Spy x family",
+            'title' => "Jadoo",
+            "link" => "https://jadoo-v2.vercel.app",
+            "github" => 'https://github.com/silenthill99/jadoo-v2.git',
+            "path" => "images/Jadoo.png",
+            'description' => "Objectif : Créer un site web pour un restaurant japonais fictif afin d'apprendre les bases du HTML et du CSS",
             'created_at' => now(),
             'updated_at' => now()
         ]);

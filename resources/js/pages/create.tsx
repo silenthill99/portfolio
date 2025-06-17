@@ -8,6 +8,7 @@ import { Textarea } from '@headlessui/react';
 type FormData = {
     title: string,
     link: string,
+    github: string,
     image: File | null,
     description: string
 }
@@ -26,6 +27,7 @@ const Create = () => {
     const { data, setData, post, reset } = useForm<Required<FormData>>({
         title: '',
         link: '',
+        github: '',
         image: null as File | null,
         description: ''
     })
@@ -51,6 +53,15 @@ const Create = () => {
                     placeholder={"Insérez un lien"}
                     value={data.link}
                     onChange={(e) => setData("link", e.target.value)}
+                    required
+                />
+                <br/>
+                <Label>Lien github</Label>
+                <Input
+                    name={"github"}
+                    placeholder={"GitHub du projet"}
+                    value={data.github}
+                    onChange={(e) => setData("github", e.target.value)}
                     required
                 />
                 <br/>

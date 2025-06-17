@@ -9,6 +9,7 @@ type ArticleProps = {
     id: number;
     title: string;
     link: string;
+    github: string;
     path: string;
     description: string;
     created_at: string;
@@ -22,6 +23,7 @@ const Update = () => {
     const {data, setData, post, reset} = useForm({
         title: article.title,
         link: article.link,
+        github: article.github,
         image: null as File | null,
         description: article.description,
     });
@@ -56,6 +58,15 @@ const Update = () => {
                     placeholder={"Insérez un lien"}
                     value={data.link}
                     onChange={(e) => setData("link", e.target.value)}
+                    required
+                />
+                <br/>
+                <Label>Lien github</Label>
+                <Input
+                    name={"github"}
+                    placeholder={"GitHub du projet"}
+                    value={data.github}
+                    onChange={(e) => setData("github", e.target.value)}
                     required
                 />
                 <br/>
