@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\StageController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,5 +31,11 @@ Route::post("/update/{article}", [ArticleController::class, "update"])->name('up
 Route::delete("/delete/{article}", [ArticleController::class, "destroy"])->name('article.destroy');
 
 Route::get("/show/{article}", [ArticleController::class, "show"])->name("article.show");
+
+Route::get("/contact", [MessageController::class, "index"])->name('contact');
+Route::post("/contact", [MessageController::class, "store"])->name('contact.submit');
+
+Route::get("/stage", [StageController::class, "index"])->middleware("auth")->name('stage');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

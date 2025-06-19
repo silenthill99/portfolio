@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, Home, HomeIcon, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, HomeIcon, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -17,6 +17,10 @@ const mainNavItems: NavItem[] = [
         title: 'Retour à l\'accueil',
         href: route('home'),
         icon: HomeIcon
+    },
+    {
+        title: 'Stages',
+        href: '/stage'
     }
 ];
 

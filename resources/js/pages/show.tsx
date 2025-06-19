@@ -6,19 +6,20 @@ type ArticleProps = {
     path: string;
     link: string;
     github: string;
+    description: string;
 }
 
 const Show = () => {
     const { article, images } = usePage<{article: ArticleProps, images: string[]}>().props;
     return (
-        <div className={"min-h-screen bg-gray-800 text-white"}>
+        <>
             <Head title={article.title} />
-            <div className={'container mx-auto'}>
+            <div className={'container mx-auto text-white'}>
                 <h1>{article.title}</h1>
-                <Carousel className={"lg:w-1/2"}>
+                <Carousel className={"lg:w-1/2 w-3/4 mx-auto lg:mx-0"}>
                     <CarouselContent>
                         <CarouselItem>
-                            <img src={`/storage/${article.path}`} alt=""  />
+                            <img src={`/storage/${article.path}`} alt="" className={"w-full h-full object-cover"}/>
                         </CarouselItem>
                         {images.length > 0 && (
                             images.map((image, index) => (
@@ -34,8 +35,10 @@ const Show = () => {
                 <a href={article.link} target={'_blank'}>Lien du projet</a> <br />
                 <a href={article.github} target={'_blank'}>Lien github</a> <br/>
                 <Link href={route('home')}>Retour à la page d'accueil</Link>
+                <h2 className={"underline"}>Objectif</h2>
+                <p>{article.description}</p>
             </div>
-        </div>
+        </>
     );
 };
 

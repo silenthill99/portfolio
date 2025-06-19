@@ -7,6 +7,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+#nprogress .bar {
+    background: #10c122 !important; /* par exemple une couleur Tailwind (sky-400) */
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px #38bdf8, 0 0 5px #38bdf8 !important;
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
