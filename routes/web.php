@@ -37,5 +37,8 @@ Route::post("/contact", [MessageController::class, "store"])->name('contact.subm
 
 Route::get("/stage", [StageController::class, "index"])->middleware("auth")->name('stage');
 
+Route::get("/add", [StageController::class, "create"])->middleware("auth")->name('add');
+Route::post("/add", [StageController::class, "store"])->middleware("auth")->name('add.submit');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

@@ -1,7 +1,13 @@
 import React from 'react';
 import AppLayout from '@/layouts/app-layout';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import type { BreadcrumbItem } from '@/types';
+
+type StageProps = {
+    id: number;
+    title: string;
+
+}
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -10,12 +16,15 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+
 const StageList = () => {
-    const { stages } = usePage().props;
+    const { stages } = usePage<{stages: StageProps[]}>().props;
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Stages"/>
-            <h1>Essai</h1>
+            <div className={"p-5"}>
+                <Link href={route('add')} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700"}>Ajouter un article</Link>
+            </div>
         </AppLayout>
     );
 };

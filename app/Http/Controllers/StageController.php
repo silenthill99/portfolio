@@ -16,13 +16,23 @@ class StageController extends Controller
         ]);
     }
 
+    public function create() {
+        return Inertia::render('add');
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([
-
+            'title' => 'required|string|max:255',
+            'entreprise' => 'required|string|max:255',
+            'competences' => 'required|string|max:255',
+            'start_at' => "required|date",
+            "end_at" => "nullable|date",
         ]);
 
-        return Stage::create($data);
+        Stage::create($data);
+
+        return Inertia::render('add');
     }
 
     public function show(Stage $stage)

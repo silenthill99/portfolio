@@ -29,7 +29,7 @@ const Contact = () => {
     }
 
     return (
-        <div className={"container mx-auto"}>
+        <div className={"container mx-auto text-white"}>
             <Head title={"Nous contacter"}/>
             <h1>Nous contacter</h1>
             <form action="" method={"POST"} onSubmit={handleSubmit} className={"bg-white p-5 w-200 rounded-lg mx-auto text-black"}>
