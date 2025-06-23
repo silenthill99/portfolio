@@ -7,8 +7,15 @@ type ArticleProps = {
     path: string;
 }
 
+type StageProps = {
+    id: number;
+    title: string;
+    start_at: string;
+    end_at: string;
+}
+
 export default function Welcome() {
-    const { articles } = usePage<SharedData & { articles: ArticleProps[] }>().props;
+    const { articles, stages } = usePage<SharedData & { articles: ArticleProps[], stages: StageProps[] }>().props;
 
     return (
         <div className={"pb-5 text-white"}>
@@ -41,7 +48,22 @@ export default function Welcome() {
                     <div className={"flex flex-col gap-5"}>
                         <h2 className={"pb-0"}>Parcours professionnel</h2>
                         <ul className={'list-disc list-inside'}>
-                            <li>Janvier 2023 : Stage de 2 semaines chez DevCSI</li>
+                            {stages.map(stage => (
+                                <li key={stage.id}>
+                                    <span className={'font-semibold underline'}>{stage.title}</span><br/>
+                                    {stage.end_at && (
+                                        <span>Stage du {new Date(stage.start_at).toLocaleDateString("fr-FR", {
+                                            "day": "numeric",
+                                            "month": "long",
+                                            "year": "numeric",
+                                        })} au {new Date(stage.end_at).toLocaleDateString("fr-FR", {
+                                            "day": "numeric",
+                                            "month": "long",
+                                            "year": "numeric"
+                                        })}</span>
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                         <Link href={route('contact')} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Nous contacter</Link>
                     </div>

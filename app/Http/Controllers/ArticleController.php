@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
     public function create()
     {
-        return Inertia::render('create');
+        return Inertia::render('articles/create');
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return Inertia::render('update', [
+        return Inertia::render('articles/update', [
             'article' => $article
         ]);
     }
@@ -85,7 +85,7 @@ class ArticleController extends Controller
             });
         }
 
-        return Inertia::render('show', [
+        return Inertia::render('articles/show', [
             'article' => $article,
             'images' => $images
         ]);

@@ -11,13 +11,13 @@ class StageController extends Controller
     public function index()
     {
         $stage = Stage::all();
-        return Inertia::render('stage-list', [
+        return Inertia::render('stages/index', [
             'stages' => $stage
         ]);
     }
 
     public function create() {
-        return Inertia::render('add');
+        return Inertia::render('stages/create');
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class StageController extends Controller
 
         Stage::create($data);
 
-        return Inertia::render('add');
+        return Inertia::render('stages/create');
     }
 
     public function show(Stage $stage)
@@ -43,12 +43,16 @@ class StageController extends Controller
     public function update(Request $request, Stage $stage)
     {
         $data = $request->validate([
-
+            "title" => "required|string|max:255",
+            "entreprise" => "required|string|max:255",
+            "competences" => "required|string|max:255",
+            "start_at" => "required|date",
+            "end_at" => "nullable|date",
         ]);
 
         $stage->update($data);
 
-        return $stage;
+        return redirect(route("stage"));
     }
 
     public function destroy(Stage $stage)
@@ -56,5 +60,12 @@ class StageController extends Controller
         $stage->delete();
 
         return response()->json();
+    }
+
+    public function edit(Stage $stage)
+    {
+        return Inertia::render('stages/edit', [
+            "stage" => $stage
+        ]);
     }
 }

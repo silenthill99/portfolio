@@ -10,7 +10,7 @@ type FormProps = {
     end_at: string;
 }
 
-const Add = () => {
+const Create = () => {
 
     const { data, setData, post, reset } = useForm<Required<FormProps>>({
         title: "",
@@ -46,7 +46,7 @@ const Add = () => {
                 <input type="text" name={"entreprise"} placeholder={"Nom de l'entreprise"} className={"block w-full border-b my-2 focus:outline-none"} value={data.entreprise} onChange={e => setData("entreprise", e.target.value)} required/> <br/>
                 <div className={"flex justify-between"}>
                     <div>
-                        <label htmlFor="start_at" className={"mb-2 inline-block"} >Date de début</label><br/>
+                        <label htmlFor="start_at" className={"mb-2 inline-block"}>Date de début</label><br/>
                         <input type="date" name="start_at" id="start_at" value={data.start_at} onChange={e => setData("start_at", e.target.value)} required/>
                     </div>
                     <div>
@@ -61,4 +61,4 @@ const Add = () => {
     );
 };
 
-export default Add;
+export default Create;
