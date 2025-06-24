@@ -2,8 +2,8 @@ import React, { FormEvent, useState } from 'react';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@headlessui/react';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 type ArticleProps = {
     id: number;
@@ -38,7 +38,7 @@ const Update = () => {
     }
 
     return (
-        <div className={"flex flex-col items-center justify-center"}>
+        <div className={"flex flex-col items-center justify-center bg-white"}>
             <h1>Modifier un article</h1>
             <Head title={"Modifier"}/>
             <form action="" method={"post"} encType={"multipart/form-data"} className={"border p-2 w-90.5 my-5"} onSubmit={handleSubmit}>

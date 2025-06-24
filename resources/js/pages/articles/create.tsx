@@ -33,7 +33,7 @@ const Create = () => {
     })
 
     return (
-        <div className={"min-h-screen flex flex-col items-center justify-center"}>
+        <div className={"min-h-screen flex flex-col items-center justify-center mx-auto bg-white"}>
             <h1>Ajouter un site web</h1>
             <Head title={"Créer un article"}/>
             <form action="" method={"post"} encType={"multipart/form-data"} className={"border p-2 w-90.5 my-5"} onSubmit={handleSubmit}>
