@@ -59,7 +59,7 @@ class StageController extends Controller
     {
         $stage->delete();
 
-        return response()->json();
+        return redirect(route('stage'));
     }
 
     public function edit(Stage $stage)

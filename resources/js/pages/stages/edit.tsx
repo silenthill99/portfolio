@@ -15,7 +15,7 @@ const Edit = () => {
 
     const {stage} = usePage<{stage: StageProps}>().props;
 
-    const { data, setData, post, reset } = useForm<Required<StageProps>>({
+    const { data, setData, put, reset } = useForm<Required<StageProps>>({
         id: stage.id,
         title: stage.title,
         entreprise: stage.entreprise,
@@ -26,7 +26,7 @@ const Edit = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post(route("stage.update", stage), {
+        put(route("stage.update", stage), {
             onFinish: () => reset()
         })
     }
@@ -34,7 +34,7 @@ const Edit = () => {
     return (
         <div className={"min-h-screen flex flex-col items-center justify-center"}>
             <Head title={"Modifier l'article"}/>
-            <form action={route('stage')} method={"POST"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
+            <form action={route('stage')} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
                 <label>Titre du post</label>
                 <input
                     type={"text"}

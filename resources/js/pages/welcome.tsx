@@ -24,9 +24,9 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <main className={"container mx-auto"}>
-                <h1 className={"text-5xl py-5 font-bold uppercase"}>Florian GRAZIANI</h1>
+                <h1 className={"text-5xl py-5 font-bold uppercase"}>Florian GRAZIANI - Développeur web fullstack</h1>
                 <div className={"grid lg:grid-cols-2"}>
-                    <div>
+                    <div className={"mb-12"}>
                         <h2>A propos</h2>
                         <ul className={'list-disc list-inside'}>
                             <li>Né le 11 Juillet 1999 a Annecy</li>
@@ -45,7 +45,7 @@ export default function Welcome() {
                             </li>
                         </ul>
                     </div>
-                    <div className={"flex flex-col gap-5"}>
+                    <div className={"flex flex-col gap-5 mb-12"}>
                         <h2 className={"pb-0"}>Parcours professionnel</h2>
                         <ul className={'list-disc list-inside'}>
                             {stages.map(stage => (
@@ -65,7 +65,7 @@ export default function Welcome() {
                                 </li>
                             ))}
                         </ul>
-                        <Link href={route('contact')} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Nous contacter</Link>
+                        <Link href={route('contact')} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Me contacter</Link>
                     </div>
                 </div>
                 <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>

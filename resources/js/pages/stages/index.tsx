@@ -1,6 +1,6 @@
 import React from 'react';
 import AppLayout from '@/layouts/app-layout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import type { BreadcrumbItem } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
@@ -23,6 +23,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const Index = () => {
     const { stages } = usePage<{stages: StageProps[]}>().props;
+
+    function handleDelete(id: number) {
+        if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
+            router.delete(route("stage.destroy", id))
+        }
+    }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Stages"/>
@@ -58,8 +64,9 @@ const Index = () => {
                                         "month": "long",
                                         "year": "numeric"
                                     })}</TableCell>
-                                    <TableCell>
+                                    <TableCell className={"space-x-2"}>
                                         <Link href={route("stage.edit", stage)}>Modifier</Link>
+                                        <button onClick={() => handleDelete(stage.id)}>Supprimer</button>
                                     </TableCell>
                                 </TableRow>
                             ))}

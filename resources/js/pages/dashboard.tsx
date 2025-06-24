@@ -63,7 +63,7 @@ export default function Dashboard() {
                                     </TableCell>
                                     <TableCell>
                                         <ul className={"flex gap-2"}>
-                                            <Link href={""} className={"hover:underline"}>Voir</Link>
+                                            <Link href={route("article.show", art)} className={"hover:underline"}>Voir</Link>
                                             <Link href={route("update", art)} className={"hover:underline"}>Modifier</Link>
                                             <button onClick={() => router.delete(route("article.destroy", 1))} className={"hover:underline"}>Supprimer</button>
                                         </ul>

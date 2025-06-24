@@ -41,7 +41,8 @@ Route::post("/contact", [MessageController::class, "store"])->name('contact.subm
 Route::get("/stage", [StageController::class, "index"])->middleware("auth")->name('stage');
 Route::get("/stage/{stage}/edit", [StageController::class, "edit"])->name("stage.edit");
 
-Route::post("/stage/{stage}", [StageController::class, "update"])->name("stage.update");
+Route::put("/stage/{stage}", [StageController::class, "update"])->name("stage.update");
+Route::delete("/stage/{stage}/delete", [StageController::class, 'destroy'])->name("stage.destroy");
 
 Route::get("/add", [StageController::class, "create"])->middleware("auth")->name('add');
 Route::post("/add", [StageController::class, "store"])->middleware("auth")->name('add.submit');
