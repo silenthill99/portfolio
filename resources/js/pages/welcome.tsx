@@ -10,6 +10,8 @@ type ArticleProps = {
 type StageProps = {
     id: number;
     title: string;
+    entreprise: string;
+    competences: string;
     start_at: string;
     end_at: string;
 }
@@ -51,6 +53,7 @@ export default function Welcome() {
                             {stages.map(stage => (
                                 <li key={stage.id}>
                                     <span className={'font-semibold underline'}>{stage.title}</span><br/>
+                                    <span className={"underline"}>Chez {stage.entreprise}</span> <br/>
                                     {stage.end_at && (
                                         <span>Stage du {new Date(stage.start_at).toLocaleDateString("fr-FR", {
                                             "day": "numeric",
@@ -62,6 +65,7 @@ export default function Welcome() {
                                             "year": "numeric"
                                         })}</span>
                                     )}
+                                    <p>{stage.competences}</p>
                                 </li>
                             ))}
                         </ul>

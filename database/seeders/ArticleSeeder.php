@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ArticleSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class ArticleSeeder extends Seeder
 
         DB::table('articles')->insert([
             'title' => "Jadoo",
+            'slug' => Str::slug("Jadoo"),
             "link" => "https://jadoo-v2.vercel.app",
             "github" => 'https://github.com/silenthill99/jadoo-v2.git',
             "path" => "images/Jadoo.png",
