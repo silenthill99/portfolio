@@ -28,7 +28,7 @@ export default function Welcome() {
             <main className={"container mx-auto"}>
                 <h1 className={"text-5xl py-5 font-bold uppercase"}>Florian GRAZIANI - Développeur web fullstack</h1>
                 <div className={"grid lg:grid-cols-2"}>
-                    <div className={"mb-12"}>
+                    <div>
                         <h2>A propos</h2>
                         <ul className={'list-disc list-inside'}>
                             <li>Né le 11 Juillet 1999 a Annecy</li>
