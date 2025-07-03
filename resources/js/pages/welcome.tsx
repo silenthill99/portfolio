@@ -77,7 +77,7 @@ export default function Welcome() {
                     {articles.map((article) => (
                         <figure key={article.id} className={"rounded-3xl bg-white h-100 flex flex-col shadow-2xs"}>
                             <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl w-full h-7/10 object-cover"} />
-                            <figcaption className={"text-black px-5 flex flex-col justify-between grow pb-5"}>
+                            <figcaption className={"text-black px-5 flex flex-col justify-between grow p-5 border-t"}>
                                 <h3 className={"uppercase font-semibold text-2xl"}>{article.title}</h3>
                                 <Link href={route("article.show", article)} className={"hover:underline"}>En voir plus</Link>
                             </figcaption>

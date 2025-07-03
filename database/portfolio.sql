@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : dim. 29 juin 2025 à 22:01
+-- Généré le : jeu. 03 juil. 2025 à 12:48
 -- Version du serveur : 8.0.35-0ubuntu0.22.04.1
 -- Version de PHP : 8.3.1
 
@@ -44,7 +44,8 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `slug`, `link`, `github`, `path`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Jadoo', 'jadoo', 'https://jadoo-v2.vercel.app', 'https://github.com/silenthill99/jadoo-v2.git', 'images/Jadoo.png', 'Objectif : Créer un site web pour un restaurant japonais fictif afin d\'apprendre les bases du HTML et du CSS', '2025-06-27 15:02:08', '2025-06-27 15:02:08');
+(1, 'Jadoo', 'jadoo', 'https://jadoo-v2.vercel.app', 'https://github.com/silenthill99/jadoo-v2.git', 'images/Jadoo.png', 'Objectif : Créer un site web pour un restaurant japonais fictif afin d\'apprendre les bases du HTML et du CSS', '2025-06-27 15:02:08', '2025-06-27 15:02:08'),
+(2, 'Nebralis', 'nebralis', 'http://nebralis.test', 'https://github.com/silenthill99/oxydia.git', 'images/Nebralis.png', 'Un site internet pour mes différents projets de serveurs Minecraft', '2025-07-03 12:21:07', '2025-07-03 12:21:07');
 
 -- --------------------------------------------------------
 
@@ -193,15 +194,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('3JfFT5PUzqPSvJtldJjqacGxvFM5bi5IxIbmtgCk', NULL, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSm94Y3hMYjJ2cEJ5QUdmdVRGMmtXTEVFdlhBRk1xOEVaWHNQREN2SiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1750700646),
-('9Q2JqTadFOtfrUzIhO53XY8OrwNomTNmW1YTdQxc', NULL, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiOGJmVkJGcUxpSUJxWVZsZVZXcXFtVUVna09mdE9pazlTUUZiaWxsWiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1751194532),
-('eiiDwH4qV2IaTRK074TAj5J8mGvZ41FZf6CCTXXi', 1, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMVJzWjQzeDFLYUtIazd5RkVNZ25PSVA1RmNRd0VQMzB5Vk9LYm5UWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdCI7fX0=', 1750406753),
-('EMl1kNelMn0ut81a4OCC9KRrHOwCxeRV6x8l81My', NULL, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicEt1ejJseUt1UFVSMDV1VkxRUU02NVY4bFMxdkRWdXhGTk1YSkZEOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1751054009),
-('GEbswq1niEsPCazZriXlp7mYyl773f3fpzznHe1U', NULL, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoia3hKcEVsY3IyWjVDWEdaNkY3T3FKUzVBdGw2TjdQNWFtVEZOemVjQSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1750676401),
-('HR3bA0RkNbB8AAXJTIY0kRV14EJU0zFsu2KEa8zw', 1, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoia0ZacG9RTDR6N0Y2bTRlVXMwR0VUS0FmTWpWNTJpaXFJd09tcUp4aCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdC9hZGQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1750362220),
-('PUVmSPxMKwu1CEIEz6POqM8c7zSMDmn0FKxz7Fp2', 1, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidUhEamw1ckNNQlBGMk8xZG1YN2M1Wk0xT1VFWk9DUzV5cEoxZzEwbSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdC9zdGFnZS8xL2VkaXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1750711763),
-('SsWsteAE0QVsd00Dr5EtB51qNt07Dq0VUtQ9WqrM', NULL, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZENUWXZ1cm1HMmJ5ZzdPQnVoejFadzdxNFVibjJUN1puaFphSW43ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1751046416),
-('xjLcIagnhq8TR8MV5RU66cwzQxLBvc4M98F28vbf', 1, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTDdGUmZ5YmZtVXRMRWIydXlBRmxMdGJnRGhtcnNycnhyYlBQaEdtZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTk4OiJodHRwOi8vcG9ydGZvbGlvLnRlc3QvYWRkP2NvbXBldGVuY2VzPUQlQzMlQTlidXQlMjBkJTI3YXBwcmVudGlzc2FnZSUyMGRlcyUyMGJhc2VzJTIwZHUlMjBIVE1MJTJDJTIwZHUlMjBDU1MlMjBldCUyMGR1JTIwSlMmZW5kX2F0PSZlbnRyZXByaXNlPURldkNTSSZzdGFydF9hdD0yMDIzLTAxLTMwJnRpdGxlPUQlQzMlQTl2ZWxvcHBldXIlMjB3ZWIiO31zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1750347914);
+('sEHBQte3ImbTV7a7s4buRyhTpYMHSowklMbTxvcw', 1, '192.168.56.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQkRldDg0V3dEQ2xvMEZZZHJJTVF1SmJ2ZXdRczZjeGVUU2NKTjNJYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9wb3J0Zm9saW8udGVzdCI7fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1751546725);
 
 -- --------------------------------------------------------
 
@@ -341,7 +334,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`

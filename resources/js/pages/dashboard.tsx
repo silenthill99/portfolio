@@ -53,7 +53,7 @@ export default function Dashboard() {
                                         {art.title}
                                     </TableCell>
                                     <TableCell>
-                                        <img src={"storage/" + art.path} alt={art.path} className={"w-full h-40 object-cover"}/>
+                                        <img src={"storage/" + art.path} alt={art.path} className={"w-full h-40 object-cover shadow"}/>
                                     </TableCell>
                                     <TableCell>
                                         {art.description}
