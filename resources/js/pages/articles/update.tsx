@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 type ArticleProps = {
     id: number;
     title: string;
+    slug: string;
     link: string;
     github: string;
     path: string;
@@ -32,7 +33,7 @@ const Update = () => {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        post(route("update", article.id), {
+        post(route("update.submit", article.slug), {
             onFinish: () => reset()
         })
     }
