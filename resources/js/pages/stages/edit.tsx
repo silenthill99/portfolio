@@ -34,7 +34,7 @@ const Edit = () => {
     return (
         <div className={"min-h-screen flex flex-col items-center justify-center"}>
             <Head title={"Modifier l'article"}/>
-            <form action={route('stage')} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
+            <form action={route('stage.update', stage)} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
                 <label>Titre du post</label>
                 <input
                     type={"text"}
