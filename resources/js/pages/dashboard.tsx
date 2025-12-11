@@ -3,8 +3,7 @@ import { Article, type BreadcrumbItem } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { create, update } from '@/routes';
-import article from '@/routes/article';
+import article from '@/routes/articles';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -21,10 +20,15 @@ export default function Dashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-                <Button className={"self-start"} onClick={() => {
-                    router.visit(create())
-                }}>Créer un article</Button>
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+                <Button
+                    className={'self-start'}
+                    onClick={() => {
+                        router.visit(article.create());
+                    }}
+                >
+                    Créer un article
+                </Button>
                 {articles.length > 0 ? (
                     <Table>
                         <TableCaption>Liste des projets</TableCaption>
@@ -41,32 +45,31 @@ export default function Dashboard() {
                         <TableBody>
                             {articles.map((art) => (
                                 <TableRow>
+                                    <TableCell>{art.id}</TableCell>
+                                    <TableCell>{art.title}</TableCell>
                                     <TableCell>
-                                        {art.id}
+                                        <img src={'storage/' + art.path} alt={art.path} className={'h-40 w-full object-cover shadow'} />
                                     </TableCell>
-                                    <TableCell>
-                                        {art.title}
-                                    </TableCell>
-                                    <TableCell>
-                                        <img src={"storage/" + art.path} alt={art.path} className={"w-full h-40 object-cover shadow"}/>
-                                    </TableCell>
-                                    <TableCell>
-                                        {art.description}
-                                    </TableCell>
+                                    <TableCell>{art.description}</TableCell>
                                     <TableCell>
                                         <span>{new Date(art.created_at).toLocaleString()}</span>
                                     </TableCell>
                                     <TableCell>
-                                        <ul className={"flex gap-2"}>
-                                            <Link href={article.show({article: art})} className={"hover:underline"}>Voir</Link>
-                                            <Link href={update({slug: art.slug})} className={"hover:underline"}>Modifier</Link>
-                                            <button onClick={() => router.delete(article.destroy({article: art}))} className={"hover:underline"}>Supprimer</button>
+                                        <ul className={'flex gap-2'}>
+                                            <Link href={article.show({ article: art })} className={'hover:underline'}>
+                                                Voir
+                                            </Link>
+                                            <Link href={article.edit({ article: art })} className={'hover:underline'}>
+                                                Modifier
+                                            </Link>
+                                            <button onClick={() => router.delete(article.destroy({ article: art }))} className={'hover:underline'}>
+                                                Supprimer
+                                            </button>
                                         </ul>
                                     </TableCell>
                                 </TableRow>
                             ))}
-                            <TableRow>
-                            </TableRow>
+                            <TableRow></TableRow>
                         </TableBody>
                     </Table>
                 ) : (

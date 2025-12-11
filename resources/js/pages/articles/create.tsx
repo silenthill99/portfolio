@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@headlessui/react';
-import { create } from '@/routes';
+import articles from '@/routes/articles';
 
 type FormData = {
     title: string,
@@ -17,7 +17,7 @@ const Create = () => {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        post(create().url, {
+        post(articles.store().url, {
             forceFormData: true,
             onFinish: ()=> reset()
         })

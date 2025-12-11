@@ -4,7 +4,6 @@ import { Head, Link, router, usePage } from '@inertiajs/react';
 import type { BreadcrumbItem, Stage } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import stage, { edit } from '@/routes/stage';
-import { add } from '@/routes';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -26,7 +25,7 @@ const Index = () => {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Stages"/>
             <div className={"p-5"}>
-                <Link href={add()} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
+                <Link href={stage.create()} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
                 {stages.length > 0 ? (
                     <Table>
                         <TableHeader>

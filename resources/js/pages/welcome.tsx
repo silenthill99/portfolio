@@ -1,7 +1,7 @@
 import { Article, type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { contact } from '@/routes';
-import { show } from '@/routes/article';
+import { show } from '@/routes/articles';
 
 type StageProps = {
     id: number;

@@ -5,9 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Article } from '@/types';
-import update from '@/routes/update';
 import InputError from '@/components/input-error';
 import storage from '@/routes/storage';
+import { update } from '@/routes/articles';
 
 const Update = () => {
 
@@ -21,7 +21,7 @@ const Update = () => {
         <div className={'flex flex-col items-center justify-center bg-white'}>
             <h1>Modifier un article</h1>
             <Head title={'Modifier'} />
-            <Form {...update.submit.form({ article: article })} resetOnSuccess={true}>
+            <Form {...update.form({ article: article })} resetOnSuccess={true}>
                 {({ errors }) => (
                     <div className={'space-y-4'}>
                         <div>
