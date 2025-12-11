@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Head, useForm } from '@inertiajs/react';
+import add from '@/routes/add';
 
 type FormProps = {
     title: string;
@@ -30,7 +31,7 @@ const Create = () => {
                 return;
             }
         }
-        post(route('add.submit'), {
+        post(add.submit().url, {
             onFinish: () => reset()
         })
     }

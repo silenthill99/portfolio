@@ -1,21 +1,15 @@
 import { Head, useForm, usePage } from '@inertiajs/react';
 import React, { FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
+import {update} from '@/routes/stage';
+import { Stage } from '@/types';
 
-type StageProps = {
-    id: number,
-    title: string,
-    entreprise: string,
-    competences: string,
-    start_at: string,
-    end_at: string
-}
 
 const Edit = () => {
 
-    const {stage} = usePage<{stage: StageProps}>().props;
+    const {stage} = usePage<{stage: Stage}>().props;
 
-    const { data, setData, put, reset } = useForm<Required<StageProps>>({
+    const { data, setData, put, reset } = useForm<Required<Stage>>({
         id: stage.id,
         title: stage.title,
         entreprise: stage.entreprise,
@@ -26,7 +20,7 @@ const Edit = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        put(route("stage.update", stage), {
+        put(update({stage: stage}).url, {
             onFinish: () => reset()
         })
     }
@@ -34,7 +28,7 @@ const Edit = () => {
     return (
         <div className={"min-h-screen flex flex-col items-center justify-center"}>
             <Head title={"Modifier l'article"}/>
-            <form action={route('stage.update', stage)} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
+            <form action={update({stage: stage}).url} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
                 <label>Titre du post</label>
                 <input
                     type={"text"}

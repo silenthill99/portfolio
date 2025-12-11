@@ -1,11 +1,7 @@
-import { type SharedData } from '@/types';
+import { Article, type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-
-type ArticleProps = {
-    id: number;
-    title: string;
-    path: string;
-}
+import { contact } from '@/routes';
+import { show } from '@/routes/article';
 
 type StageProps = {
     id: number;
@@ -17,7 +13,7 @@ type StageProps = {
 }
 
 export default function Welcome() {
-    const { articles, stages } = usePage<SharedData & { articles: ArticleProps[], stages: StageProps[] }>().props;
+    const { articles, stages } = usePage<SharedData & { articles: Article[], stages: StageProps[] }>().props;
 
     return (
         <div className={"pb-5 text-white"}>
@@ -69,7 +65,7 @@ export default function Welcome() {
                                 </li>
                             ))}
                         </ul>
-                        <Link href={route('contact')} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Me contacter</Link>
+                        <Link href={contact()} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Me contacter</Link>
                     </div>
                 </div>
                 <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>
@@ -79,7 +75,7 @@ export default function Welcome() {
                             <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl w-full h-7/10 object-cover"} />
                             <figcaption className={"text-black px-5 flex flex-col justify-between grow p-5 border-t"}>
                                 <h3 className={"uppercase font-semibold text-2xl"}>{article.title}</h3>
-                                <Link href={route("article.show", article)} className={"hover:underline"}>En voir plus</Link>
+                                <Link href={show({article: article})} className={"hover:underline"}>En voir plus</Link>
                             </figcaption>
                         </figure>
                     ))}

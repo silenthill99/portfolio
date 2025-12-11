@@ -1,17 +1,10 @@
 import React from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import type { BreadcrumbItem } from '@/types';
+import type { BreadcrumbItem, Stage } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-
-type StageProps = {
-    id: number;
-    title: string;
-    entreprise: string;
-    competences: string;
-    start_at: string;
-    end_at: string;
-}
+import stage, { edit } from '@/routes/stage';
+import { add } from '@/routes';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,18 +15,18 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 
 const Index = () => {
-    const { stages } = usePage<{stages: StageProps[]}>().props;
+    const { stages } = usePage<{stages: Stage[]}>().props;
 
     function handleDelete(id: number) {
         if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
-            router.delete(route("stage.destroy", id))
+            router.delete(stage.destroy({stage: {id: id}}))
         }
     }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Stages"/>
             <div className={"p-5"}>
-                <Link href={route('add')} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
+                <Link href={add()} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
                 {stages.length > 0 ? (
                     <Table>
                         <TableHeader>
@@ -65,7 +58,7 @@ const Index = () => {
                                         "year": "numeric"
                                     })}</TableCell>
                                     <TableCell className={"space-x-2"}>
-                                        <Link href={route("stage.edit", stage)}>Modifier</Link>
+                                        <Link href={edit({stage: stage})}>Modifier</Link>
                                         <button onClick={() => handleDelete(stage.id)}>Supprimer</button>
                                     </TableCell>
                                 </TableRow>

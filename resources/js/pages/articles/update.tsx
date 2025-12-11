@@ -4,22 +4,12 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-
-type ArticleProps = {
-    id: number;
-    title: string;
-    slug: string;
-    link: string;
-    github: string;
-    path: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-}
+import { Article } from '@/types';
+import update from '@/routes/update';
 
 const Update = () => {
 
-    const {article} = usePage<{article: ArticleProps}>().props
+    const {article} = usePage<{article: Article}>().props
 
     const {data, setData, post, reset} = useForm({
         title: article.title,
@@ -33,7 +23,7 @@ const Update = () => {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        post(route("update.submit", article.slug), {
+        post(update.submit({article: article}).url, {
             onFinish: () => reset()
         })
     }

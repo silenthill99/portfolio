@@ -1,16 +1,10 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-
-type ArticleProps = {
-    title: string;
-    path: string;
-    link: string;
-    github: string;
-    description: string;
-}
+import { Article } from '@/types';
+import { home } from '@/routes';
 
 const Show = () => {
-    const { article, images } = usePage<{article: ArticleProps, images: string[]}>().props;
+    const { article, images } = usePage<{article: Article, images: string[]}>().props;
     return (
         <>
             <Head title={article.title} />
@@ -34,7 +28,7 @@ const Show = () => {
                 </Carousel>
                 <a href={article.link} target={'_blank'}>Lien du projet</a> <br />
                 <a href={article.github} target={'_blank'}>Lien github</a> <br/>
-                <Link href={route('home')}>Retour à la page d'accueil</Link>
+                <Link href={home()}>Retour à la page d'accueil</Link>
                 <h2 className={"underline"}>Objectif</h2>
                 <p>{article.description}</p>
             </div>

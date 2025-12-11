@@ -38,7 +38,7 @@ class ArticleController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('home')->with('success', 'Article créé avec succès.');
+        return redirect()->home()->with('success', 'Article créé avec succès.');
     }
 
     public function edit(Article $article)

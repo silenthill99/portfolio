@@ -5,6 +5,28 @@ export interface Auth {
     user: User;
 }
 
+export type Article = {
+    id: number;
+    title: string;
+    path: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+    slug: string;
+    link: string;
+    github: string;
+};
+
+export type Stage = {
+    id: number;
+    title: string;
+    entreprise: string;
+    competences: string;
+    start_at: string;
+    end_at: string;
+};
+
+
 export interface BreadcrumbItem {
     title: string;
     href: string;

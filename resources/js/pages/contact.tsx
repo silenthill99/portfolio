@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import contact from '@/routes/contact';
 
 type FormProps = {
     pseudo: string;
@@ -23,7 +24,7 @@ const Contact = () => {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        post(route("contact.submit"), {
+        post(contact.submit().url, {
             onFinish: () => reset()
         })
     }

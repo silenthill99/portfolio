@@ -25,3 +25,7 @@ yarn-error.log
 
 # Project exclude paths
 /storage/framework/
+
+/resources/js/actions
+/resources/js/routes
+/resources/js/wayfinder
