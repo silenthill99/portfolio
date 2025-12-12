@@ -1,7 +1,7 @@
 import { Head, useForm, usePage } from '@inertiajs/react';
 import React, { FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
-import {update} from '@/routes/stage';
+import {update} from '@/actions/App/Http/Controllers/StageController';
 import { Stage } from '@/types';
 
 

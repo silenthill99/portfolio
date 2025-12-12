@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Head, useForm } from '@inertiajs/react';
-import stage from '@/routes/stage';
+import StageController from '@/actions/App/Http/Controllers/StageController';
 
 type FormProps = {
     title: string;
@@ -31,7 +31,7 @@ const Create = () => {
                 return;
             }
         }
-        post(stage.store().url, {
+        post(StageController.store().url, {
             onFinish: () => reset()
         })
     }
