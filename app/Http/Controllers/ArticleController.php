@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ArticleController extends Controller
@@ -14,64 +17,56 @@ class ArticleController extends Controller
         return Inertia::render('articles/create');
     }
 
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        $request->validate([
-            "title" => "required|string|max:255",
-            'link' => "required|string|max:255",
-            "github" => "required|string|max:255",
-            'image' => 'required|image|max:8000',
-            'description' => "required|string"
-        ]);
+        $data = $request->validated();
 
         $image = $request->file('image');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $path = $image->storeAs('images', $imageName, 'public');
+        $imageName = time().'_'.$image->getClientOriginalName();
+        $data['path'] = $image->storeAs('images', $imageName, 'public');
 
-        Article::create([
-            'title' => $request->title,
-            'link' => $request->link,
-            'github' => $request->github,
-            'path' => $path,
-            'description' => $request->description
-        ]);
+        Article::create($data);
 
-        return redirect()->home()->with('success', 'Article créé avec succès.');
+        return redirect()->route('home')->with('success', 'Article créé avec succès.');
     }
 
     public function edit(Article $article)
     {
         return Inertia::render('articles/update', [
-            'article' => $article
+            'article' => $article,
         ]);
     }
 
-    public function update(Article $article, Request $request)
+    public function update(Article $article, UpdateArticleRequest $request)
     {
-        $validated = $request->validate([
-            "title" => "required|string|max:255",
-            "link" => "required|string|max:255",
-            "github" => "required|string|max:255",
-            "image" => "nullable|image|max:8000",
-            "description" => "required|string"
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
+            if ($article->path) {
+                $this->deleteFile($article->path);
+            }
             $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imageName = time().'_'.$image->getClientOriginalName();
             $validated['path'] = $image->storeAs('images', $imageName, 'public');
         }
 
         $article->update($validated);
+
         return redirect()->route('dashboard')->with('success', 'Article mis à jour.');
     }
 
-    public function destroy(Article $article) {
+    public function destroy(Article $article)
+    {
+        if ($article->path) {
+            $this->deleteFile($article->path);
+        }
         $article->delete();
+
         return redirect()->route('dashboard')->with('success', 'Article supprimé.');
     }
 
-    public function show(Article $article) {
+    public function show(Article $article)
+    {
 
         $path = public_path('images/'.$article->title);
         $images = [];
@@ -80,13 +75,20 @@ class ArticleController extends Controller
             $imageFiles = File::files($path);
 
             $images = collect($imageFiles)->map(function ($file) use ($article) {
-                return "/images/" . $article->title . "/" . $file->getFilename();
+                return '/images/'.$article->title.'/'.$file->getFilename();
             });
         }
 
         return Inertia::render('articles/show', [
             'article' => $article,
-            'images' => $images
+            'images' => $images,
         ]);
+    }
+
+    public function deleteFile(string $file)
+    {
+        if (Storage::disk('public')->exists($file)) {
+            Storage::disk('public')->delete($file);
+        }
     }
 }

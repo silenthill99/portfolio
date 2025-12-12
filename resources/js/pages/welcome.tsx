@@ -1,19 +1,10 @@
-import { Article, type SharedData } from '@/types';
+import { Article, type SharedData, Stage } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { contact } from '@/routes';
 import { show } from '@/routes/articles';
 
-type StageProps = {
-    id: number;
-    title: string;
-    entreprise: string;
-    competences: string;
-    start_at: string;
-    end_at: string;
-}
-
 export default function Welcome() {
-    const { articles, stages } = usePage<SharedData & { articles: Article[], stages: StageProps[] }>().props;
+    const { articles, stages } = usePage<SharedData & { articles: Article[], stages: Stage[] }>().props;
 
     return (
         <div className={"pb-5 text-white"}>

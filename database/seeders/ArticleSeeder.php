@@ -10,7 +10,7 @@ class ArticleSeeder extends Seeder
 {
     public function run(): void
     {
-
+        DB::table("articles")->truncate();
         DB::table('articles')->insert([
             'title' => "Jadoo",
             'slug' => Str::slug("Jadoo"),
