@@ -3,7 +3,7 @@ import { Article, type BreadcrumbItem } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import article from '@/routes/articles';
+import * as article from '@/actions/App/Http/Controllers/ArticleController';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

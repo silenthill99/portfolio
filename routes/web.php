@@ -36,7 +36,7 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 
 Route::get('/contact/create', [MessageController::class, 'create'])->name('contact.create');
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
-Route::get("/contact", [MessageController::class, 'index'])->name('contact');
+Route::get("/contact", [MessageController::class, 'index'])->name('contact.index');
 
 Route::get("/test", function () {
     dd("Test");

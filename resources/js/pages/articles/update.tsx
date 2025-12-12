@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Article } from '@/types';
 import InputError from '@/components/input-error';
 import storage from '@/routes/storage';
-import { update } from '@/routes/articles';
+import { update } from '@/actions/App/Http/Controllers/ArticleController';
 
 const Update = () => {
 
