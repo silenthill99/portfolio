@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { store } from '@/routes/contact';
+import { store } from '@/actions/App/Http/Controllers/MessageController';
 
 type FormProps = {
     pseudo: string;
