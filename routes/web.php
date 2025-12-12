@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StageController;
 use App\Models\Article;
+use App\Models\Message;
 use App\Models\Stage;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,8 +34,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
-Route::get('/contact', [MessageController::class, 'index'])->name('contact');
-Route::post('/contact', [MessageController::class, 'store'])->name('contact.submit');
+Route::get('/contact/create', [MessageController::class, 'create'])->name('contact.create');
+Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
+Route::get("/contact", [MessageController::class, 'index'])->name('contact');
+
+Route::get("/test", function () {
+    dd("Test");
+})->can("view-any", Message::class);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

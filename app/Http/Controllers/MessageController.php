@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MessageController extends Controller
 {
-    public function index() {
-        return Inertia::render('contact');
+
+    public function index()
+    {
+        $messages = Message::all();
+        return Inertia::render("messages/index", compact("messages"));
     }
 
-    public function store(Request $request)
+    public function create() {
+        return Inertia::render('messages/contact');
+    }
+
+    public function store(StoreMessageRequest $request)
     {
-        $data = $request->validate([
-            'pseudo' => 'required|string|max:255',
-            'email' => "required|email",
-            'subject' => "required|string|max:255",
-            'message' => "required|string"
-        ]);
+        $data = $request->validated();
         Message::create($data);
-        return Inertia::render('contact');
+        return Inertia::render('messages/contact');
     }
 
     public function show(Message $message)

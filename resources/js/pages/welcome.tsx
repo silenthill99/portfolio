@@ -1,7 +1,7 @@
 import { Article, type SharedData, Stage } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { contact } from '@/routes';
 import { show } from '@/routes/articles';
+import { create } from '@/routes/contact';
 
 export default function Welcome() {
     const { articles, stages } = usePage<SharedData & { articles: Article[], stages: Stage[] }>().props;
@@ -56,7 +56,7 @@ export default function Welcome() {
                                 </li>
                             ))}
                         </ul>
-                        <Link href={contact()} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Me contacter</Link>
+                        <Link href={create()} className={'p-2.5 rounded hover:underline bg-white text-black self-start'}>Me contacter</Link>
                     </div>
                 </div>
                 <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>

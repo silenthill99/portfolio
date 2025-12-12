@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import contact from '@/routes/contact';
+import { store } from '@/routes/contact';
 
 type FormProps = {
     pseudo: string;
@@ -15,7 +15,7 @@ type FormProps = {
 
 const Contact = () => {
 
-    const { data, setData, post, reset } = useForm<Required<FormProps>>({
+    const { data, setData, post } = useForm<Required<FormProps>>({
         pseudo: "",
         email: "",
         subject: "",
@@ -24,9 +24,7 @@ const Contact = () => {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        post(contact.submit().url, {
-            onFinish: () => reset()
-        })
+        post(store().url)
     }
 
     return (
