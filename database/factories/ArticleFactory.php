@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Article>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
  */
 class ArticleFactory extends Factory
 {
@@ -18,11 +18,15 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(3),
-            'link' => $this->faker->url(),
-            'github'=> $this->faker->url(),
-            'path' => "images/test-image.jpg",
-            'description' => $this->faker->paragraph(),
+            "user_id" => User::factory(),
+            "title" => $this->faker->sentence(),
+            "slug" => $this->faker->slug(),
+            "link" => $this->faker->url(),
+            "github" => $this->faker->url(),
+            "path" => $this->faker->url(),
+            "description" => $this->faker->text(),
+            "created_at" => $this->faker->dateTime(),
+            "updated_at" => $this->faker->dateTime()
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class StagePolicy
 {
@@ -37,7 +38,7 @@ class StagePolicy
      */
     public function update(User $user, Stage $stage): bool
     {
-        return true;
+        return $stage->user->is($user);
     }
 
     /**
@@ -45,7 +46,7 @@ class StagePolicy
      */
     public function delete(User $user, Stage $stage): bool
     {
-        return true;
+        return $stage->user->is($user);
     }
 
     /**
@@ -53,7 +54,7 @@ class StagePolicy
      */
     public function restore(User $user, Stage $stage): bool
     {
-        return true;
+        return $stage->user->is($user);
     }
 
     /**
@@ -61,6 +62,6 @@ class StagePolicy
      */
     public function forceDelete(User $user, Stage $stage): bool
     {
-        return true;
+        return $stage->user->is($user);
     }
 }

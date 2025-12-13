@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStageRequest;
+use App\Http\Requests\UpdateStageRequest;
 use App\Models\Stage;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class StageController extends Controller
 {
     public function index()
     {
-        $stage = Stage::all();
+        $stages = Stage::all();
         return Inertia::render('stages/index', [
-            'stages' => $stage
+            'stages' => $stages
         ]);
     }
 
@@ -20,19 +23,13 @@ class StageController extends Controller
         return Inertia::render('stages/create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStageRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'entreprise' => 'required|string|max:255',
-            'competences' => 'required|string|max:255',
-            'start_at' => "required|date",
-            "end_at" => "nullable|date",
-        ]);
+        $data = $request->validated();
 
-        Stage::create($data);
+        Auth::user()->stages()->create($data);
 
-        return Inertia::render('stages/create');
+        return redirect()->route('stage.index');
     }
 
     public function show(Stage $stage)
@@ -40,30 +37,31 @@ class StageController extends Controller
         return $stage;
     }
 
-    public function update(Request $request, Stage $stage)
+    public function update(UpdateStageRequest $request, Stage $stage)
     {
-        $data = $request->validate([
-            "title" => "required|string|max:255",
-            "entreprise" => "required|string|max:255",
-            "competences" => "required|string|max:255",
-            "start_at" => "required|date",
-            "end_at" => "nullable|date",
-        ]);
+        $data = $request->validated();
 
         $stage->update($data);
 
-        return redirect(route("stage"));
+        return redirect(route("stage.show", $stage));
     }
 
     public function destroy(Stage $stage)
     {
+        if (Gate::denies('delete', $stage)) {
+            abort(403);
+        }
         $stage->delete();
 
-        return redirect(route('stage'));
+        return redirect(route('stage.index'));
     }
 
     public function edit(Stage $stage)
     {
+        if (Gate::denies('update', $stage)) {
+            abort(403);
+        }
+
         return Inertia::render('stages/edit', [
             "stage" => $stage
         ]);

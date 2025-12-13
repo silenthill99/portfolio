@@ -6,6 +6,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -21,11 +22,13 @@ class ArticleController extends Controller
     {
         $data = $request->validated();
 
-        $image = $request->file('image');
-        $imageName = time().'_'.$image->getClientOriginalName();
-        $data['path'] = $image->storeAs('images', $imageName, 'public');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $data['path'] = $image->storeAs('images', $imageName, 'public');
+        }
 
-        Article::create($data);
+        Auth::user()->articles()->create($data);
 
         return redirect()->route('home')->with('success', 'Article créé avec succès.');
     }

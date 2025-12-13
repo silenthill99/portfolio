@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Article;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StoreArticleRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return Gate::allows('create', Article::class);
     }
 
     /**
@@ -27,7 +28,7 @@ class StoreArticleRequest extends FormRequest
             'title' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'github' => 'required|string|max:255',
-            'image' => 'required|image|max:8000',
+            'image' => 'nullable|image|max:8000',
             'description' => 'required|string',
         ];
     }

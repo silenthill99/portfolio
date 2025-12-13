@@ -2,19 +2,19 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Article;
+use App\Models\Stage;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateArticleRequest extends FormRequest
+class StoreStageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Gate::allows('update', $this->route('article'));
+        return Gate::allows('create', $this->route('stage'));
     }
 
     /**
@@ -26,10 +26,10 @@ class UpdateArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
-            'github' => 'required|string|max:255',
-            'image' => 'nullable|image|max:8000',
-            'description' => 'required|string',
+            'entreprise' => 'required|string|max:255',
+            'competences' => 'required|string|max:255',
+            'start_at' => "required|date",
+            "end_at" => "nullable|date",
         ];
     }
 }

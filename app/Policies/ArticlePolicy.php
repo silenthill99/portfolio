@@ -37,7 +37,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article): bool
     {
-        return true;
+        return $article->user->is($user);
     }
 
     /**
@@ -45,7 +45,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article): bool
     {
-        return true;
+        return $article->user->is($user);
     }
 
     /**
@@ -53,7 +53,7 @@ class ArticlePolicy
      */
     public function restore(User $user, Article $article): bool
     {
-        return true;
+        return $article->user->is($user);
     }
 
     /**
@@ -61,6 +61,6 @@ class ArticlePolicy
      */
     public function forceDelete(User $user, Article $article): bool
     {
-        return true;
+        return $article->user->is($user);
     }
 }
