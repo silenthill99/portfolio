@@ -10,12 +10,13 @@ use Illuminate\Support\Str;
 class Article extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'link',
         'github',
         'path',
-        'description'
+        'description',
     ];
 
     protected static function booted()

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +34,8 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
+        $this->authorize('update', $article);
+
         return Inertia::render('articles/update', [
             'article' => $article,
         ]);
@@ -60,6 +61,8 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
+        $this->authorize('delete', $article);
+
         if ($article->path) {
             $this->deleteFile($article->path);
         }

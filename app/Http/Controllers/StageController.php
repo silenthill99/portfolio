@@ -6,7 +6,6 @@ use App\Http\Requests\StoreStageRequest;
 use App\Http\Requests\UpdateStageRequest;
 use App\Models\Stage;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class StageController extends Controller
@@ -14,12 +13,14 @@ class StageController extends Controller
     public function index()
     {
         $stages = Stage::all();
+
         return Inertia::render('stages/index', [
-            'stages' => $stages
+            'stages' => $stages,
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         return Inertia::render('stages/create');
     }
 
@@ -43,14 +44,13 @@ class StageController extends Controller
 
         $stage->update($data);
 
-        return redirect(route("stage.show", $stage));
+        return redirect(route('stage.show', $stage));
     }
 
     public function destroy(Stage $stage)
     {
-        if (Gate::denies('delete', $stage)) {
-            abort(403);
-        }
+        $this->authorize('delete', $stage);
+
         $stage->delete();
 
         return redirect(route('stage.index'));
@@ -58,12 +58,10 @@ class StageController extends Controller
 
     public function edit(Stage $stage)
     {
-        if (Gate::denies('update', $stage)) {
-            abort(403);
-        }
+        $this->authorize('update', $stage);
 
         return Inertia::render('stages/edit', [
-            "stage" => $stage
+            'stage' => $stage,
         ]);
     }
 }
