@@ -4,7 +4,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { Message, PaginatedProps } from '@/types';
 import PaginatedButton from '@/components/paginated-button';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { show } from '@/routes/messages';
+import { show } from '@/actions/App/Http/Controllers/MessageController';
 
 const Index = () => {
     const {messages} = usePage<{messages: PaginatedProps<Message>}>().props;
