@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $articles = Article::paginate(9);
-    $stages = Stage::orderBy('id', 'desc')->limit(5)->get();
+    $articles = Article::with('user')->paginate(9);
+    $stages = Stage::with('user')->orderBy('id', 'desc')->limit(5)->get();
 
     return Inertia::render('welcome', [
         'articles' => $articles,
@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', function () {
-        $list = Article::paginate(10);
+        $list = Article::with('user')->paginate(10);
 
         return Inertia::render('dashboard', ['articles' => $list]);
     })->name('dashboard');

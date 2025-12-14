@@ -31,7 +31,7 @@ class MessageController extends Controller
         $data = $request->validated();
         $message = Message::create($data);
 
-        //        Mail::to($data['email'])->send(new MessageSendMail());
+        Mail::to($data['email'])->send(new MessageSendMail());
         Mail::to('florian.graziani@sfr.fr')->send(new MessageReceiveEmail($message));
 
         return redirect()->route('messages.create')->with('success', 'Votre message a été envoyé avec succès !');
