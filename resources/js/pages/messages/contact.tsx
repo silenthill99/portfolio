@@ -1,81 +1,49 @@
-import React, { FormEvent } from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import React from 'react';
+import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { store } from '@/actions/App/Http/Controllers/MessageController';
-
-type FormProps = {
-    pseudo: string;
-    email: string;
-    subject: string;
-    message: string;
-}
+import { LoaderCircleIcon } from 'lucide-react';
+import InputError from '@/components/input-error';
 
 const Contact = () => {
 
-    const { data, setData, post } = useForm<Required<FormProps>>({
-        pseudo: "",
-        email: "",
-        subject: "",
-        message: ""
-    })
-
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        post(store().url)
-    }
-
     return (
-        <div className={"container mx-auto text-white"}>
-            <Head title={"Nous contacter"}/>
+        <div className={'container mx-auto text-white'}>
+            <Head title={'Nous contacter'} />
             <h1>Nous contacter</h1>
-            <form action="" method={"POST"} onSubmit={handleSubmit} className={"bg-white p-5 w-200 rounded-lg mx-auto text-black"}>
-                <Label>Votre pseudo</Label>
-                <Input
-                    type={"text"}
-                    placeholder={"Votre pseudo"}
-                    name={"pseudo"}
-                    id={"pseudo"}
-                    value={data.pseudo}
-                    onChange={(e) => setData("pseudo", e.target.value)}
-                    required
-                />
-                <br/>
-                <Label>Votre mail</Label>
-                <Input
-                    type={"email"}
-                    placeholder={"Votre adresse mail"}
-                    name={"email"}
-                    id={"email"}
-                    value={data.email}
-                    onChange={e => setData("email", e.target.value)}
-                    required
-                />
-                <br/>
-                <Label>Sujet de votre demande</Label>
-                <Input
-                    type={"text"}
-                    placeholder={"Sujet de votre demande"}
-                    name={"subject"}
-                    id={"subject"}
-                    value={data.subject}
-                    onChange={e => setData("subject", e.target.value)}
-                    required
-                />
-                <br/>
-                <Label>Votre message</Label>
-                <Textarea
-                    className={"w-full h-100 border resize-none"}
-                    name={"message"}
-                    value={data.message}
-                    onChange={e => setData('message', e.target.value)}
-                    required
-                />
-                <br/>
-                <Button type={"submit"}>Envoyer</Button>
-            </form>
+            <Form resetOnSuccess={true} {...store.form()} className={'mx-auto w-200 rounded-lg bg-white p-5 text-black'}>
+                {({ errors, processing }) => (
+                    <div className={'space-y-4'}>
+                        <div>
+                            <Label htmlFor={'pseudo'}>Votre pseudo</Label>
+                            <Input type={'text'} placeholder={'Votre pseudo'} name={'pseudo'} id={'pseudo'} />
+                            {errors.pseudo && <InputError message={errors.pseudo} />}
+                        </div>
+                        <div>
+                            <Label htmlFor={'email'}>Votre mail</Label>
+                            <Input type={'email'} placeholder={'Votre adresse mail'} name={'email'} id={'email'} />
+                            {errors.email && <InputError message={errors.email} />}
+                        </div>
+                        <div>
+                            <Label htmlFor={'subject'}>Sujet de votre demande</Label>
+                            <Input type={'text'} placeholder={'Sujet de votre demande'} name={'subject'} id={'subject'} />
+                            {errors.subject && <InputError message={errors.subject} />}
+                        </div>
+                        <div>
+                            <Label htmlFor={'message'}>Votre message</Label>
+                            <Textarea className={'h-100 w-full resize-none border'} name={'message'} id={'message'} />
+                            {errors.message && <InputError message={errors.message} />}
+                        </div>
+                        <Button type={'submit'}>
+                            <span>Envoyer</span>
+                            {processing && <LoaderCircleIcon className={'animate-spin'} />}
+                        </Button>
+                    </div>
+                )}
+            </Form>
         </div>
     );
 };
