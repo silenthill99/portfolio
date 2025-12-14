@@ -31,19 +31,17 @@ class MessageController extends Controller
         $data = $request->validated();
         $message = Message::create($data);
 
-//        Mail::to($data['email'])->send(new MessageSendMail());
+        //        Mail::to($data['email'])->send(new MessageSendMail());
         Mail::to('florian.graziani@sfr.fr')->send(new MessageReceiveEmail($message));
 
-        return redirect()->route('contact.create')->with('success', 'Votre message a été envoyé avec succès !');
+        return redirect()->route('messages.create')->with('success', 'Votre message a été envoyé avec succès !');
     }
 
     public function show(Message $message)
     {
         $this->authorize('view', $message);
 
-        dd($message->all());
-
-//        return $message;
+        return Inertia::render('messages/show', compact('message'));
     }
 
     public function update(UpdateMessageRequest $request, Message $message)
@@ -52,7 +50,7 @@ class MessageController extends Controller
 
         $message->update($data);
 
-        return redirect()->route('contact.index')->with('success', 'Message mis à jour avec succès.');
+        return redirect()->route('messages.index')->with('success', 'Message mis à jour avec succès.');
     }
 
     public function destroy(Message $message)
@@ -61,6 +59,6 @@ class MessageController extends Controller
 
         $message->delete();
 
-        return redirect()->route('contact.index')->with('success', 'Message supprimé avec succès.');
+        return redirect()->route('messages.index')->with('success', 'Message supprimé avec succès.');
     }
 }

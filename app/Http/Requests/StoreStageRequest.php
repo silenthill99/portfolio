@@ -14,7 +14,7 @@ class StoreStageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('create', $this->route('stage'));
+        return Gate::allows('create', Stage::class);
     }
 
     /**
@@ -28,8 +28,8 @@ class StoreStageRequest extends FormRequest
             'title' => 'required|string|max:255',
             'entreprise' => 'required|string|max:255',
             'competences' => 'required|string|max:255',
-            'start_at' => "required|date",
-            "end_at" => "nullable|date",
+            'start_at' => 'required|date',
+            'end_at' => 'nullable|date',
         ];
     }
 }

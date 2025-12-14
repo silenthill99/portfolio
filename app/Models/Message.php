@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Inertia\Inertia;
 
 class Message extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'pseudo', 'email', 'subject', 'message'
+        'pseudo', 'email', 'subject', 'message',
     ];
 }

@@ -12,7 +12,7 @@ class StageController extends Controller
 {
     public function index()
     {
-        $stages = Stage::all();
+        $stages = Stage::orderBy('start_at', 'desc')->paginate(15);
 
         return Inertia::render('stages/index', [
             'stages' => $stages,

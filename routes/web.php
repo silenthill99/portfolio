@@ -27,13 +27,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Routes publiques pour le formulaire de contact (AVANT la resource)
-Route::get('/contact/create', [MessageController::class, 'create'])->name('contact.create');
-Route::post('/contact', [MessageController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+Route::post('/messages', [MessageController::class, 'store'])->middleware('throttle:5,1')->name('messages.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('articles', ArticleController::class)->except(['index', 'show']);
     Route::resource('/stage', StageController::class);
-    Route::resource('/contact', MessageController::class)->except(['create', 'store']);
+    Route::resource('/messages', MessageController::class)->except(['create', 'store']);
 });
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');

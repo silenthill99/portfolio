@@ -3,7 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@headlessui/react';
+import { Textarea } from '@/components/ui/textarea';
 import ArticleController from '@/actions/App/Http/Controllers/ArticleController';
 
 type FormData = {
