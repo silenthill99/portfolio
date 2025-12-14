@@ -2,7 +2,7 @@ import { Article, PaginatedProps, type SharedData, Stage } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { show } from '@/actions/App/Http/Controllers/ArticleController';
 import PaginatedButton from '@/components/paginated-button';
-import { create } from '@/routes/messages';
+import { create } from '@/actions/App/Http/Controllers/MessageController';
 
 export default function Welcome() {
     const { articles, stages } = usePage<SharedData & { articles: PaginatedProps<Article>, stages: Stage[]}>().props;
