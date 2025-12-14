@@ -63,3 +63,22 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface PaginatedProps<T> {
+    data: T[];
+    links: {
+        url: string | null;
+        label: string;
+        active: boolean
+    }[]
+}
+
+export interface Message {
+    id: number
+    pseudo: string;
+    email: string;
+    subject: string;
+    message:string;
+    created_at: string;
+    updated_at: string;
+}

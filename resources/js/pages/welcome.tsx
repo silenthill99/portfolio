@@ -1,10 +1,11 @@
-import { Article, type SharedData, Stage } from '@/types';
+import { Article, PaginatedProps, type SharedData, Stage } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { show } from '@/actions/App/Http/Controllers/ArticleController';
-import { create } from '@/actions/App/Http/Controllers/MessageController';
+import PaginatedButton from '@/components/paginated-button';
+import { create } from '@/routes/contact';
 
 export default function Welcome() {
-    const { articles, stages } = usePage<SharedData & { articles: Article[], stages: Stage[] }>().props;
+    const { articles, stages } = usePage<SharedData & { articles: PaginatedProps<Article>, stages: Stage[]}>().props;
 
     return (
         <div className={"pb-5 text-white"}>
@@ -61,7 +62,7 @@ export default function Welcome() {
                 </div>
                 <h2 className={"py-20 text-4xl uppercase font-semibold"}>Liste des projets</h2>
                 <div className={"grid md:grid-cols-2 lg:grid-cols-3 gap-10 p-10 lg:p-0"}>
-                    {articles.map((article) => (
+                    {articles.data.map((article) => (
                         <figure key={article.id} className={"rounded-3xl bg-white h-100 flex flex-col shadow-2xs"}>
                             <img src={"/storage/" + article.path} alt={""} className={"rounded-t-3xl w-full h-7/10 object-cover"} />
                             <figcaption className={"text-black px-5 flex flex-col justify-between grow p-5 border-t"}>
@@ -70,6 +71,9 @@ export default function Welcome() {
                             </figcaption>
                         </figure>
                     ))}
+                </div>
+                <div className={"flex justify-center mt-10"}>
+                    <PaginatedButton pages={articles} />
                 </div>
             </main>
         </div>

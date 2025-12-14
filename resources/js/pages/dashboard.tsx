@@ -1,9 +1,10 @@
-import AppLayout from '@/layouts/app-layout';
-import { Article, type BreadcrumbItem } from '@/types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import * as article from '@/actions/App/Http/Controllers/ArticleController';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import * as article from '@/actions/App/Http/Controllers/ArticleController';
+import AppLayout from '@/layouts/app-layout';
+import { Article, type BreadcrumbItem, PaginatedProps } from '@/types';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import PaginatedButton from '@/components/paginated-button';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -12,11 +13,8 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-
-
 export default function Dashboard() {
-
-    const { articles } = usePage<{ articles: Article[] }>().props;
+    const { articles } = usePage<{ articles: PaginatedProps<Article> }>().props;
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -29,49 +27,55 @@ export default function Dashboard() {
                 >
                     Créer un article
                 </Button>
-                {articles.length > 0 ? (
-                    <Table>
-                        <TableCaption>Liste des projets</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Identifiant</TableHead>
-                                <TableHead>Titre</TableHead>
-                                <TableHead>Images</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Date d'ajout</TableHead>
-                                <TableHead>Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {articles.map((art) => (
+                {articles.data.length > 0 ? (
+                    <>
+                        <Table>
+                            <TableCaption>Liste des projets</TableCaption>
+                            <TableHeader>
                                 <TableRow>
-                                    <TableCell>{art.id}</TableCell>
-                                    <TableCell>{art.title}</TableCell>
-                                    <TableCell>
-                                        <img src={'storage/' + art.path} alt={art.path} className={'h-40 w-full object-cover shadow'} />
-                                    </TableCell>
-                                    <TableCell>{art.description}</TableCell>
-                                    <TableCell>
-                                        <span>{new Date(art.created_at).toLocaleString()}</span>
-                                    </TableCell>
-                                    <TableCell>
-                                        <ul className={'flex gap-2'}>
-                                            <Link href={article.show({ article: art })} className={'hover:underline'}>
-                                                Voir
-                                            </Link>
-                                            <Link href={article.edit({ article: art })} className={'hover:underline'}>
-                                                Modifier
-                                            </Link>
-                                            <button onClick={() => router.delete(article.destroy({ article: art }))} className={'hover:underline'}>
-                                                Supprimer
-                                            </button>
-                                        </ul>
-                                    </TableCell>
+                                    <TableHead>Identifiant</TableHead>
+                                    <TableHead>Titre</TableHead>
+                                    <TableHead>Images</TableHead>
+                                    <TableHead>Description</TableHead>
+                                    <TableHead>Date d'ajout</TableHead>
+                                    <TableHead>Actions</TableHead>
                                 </TableRow>
-                            ))}
-                            <TableRow></TableRow>
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {articles.data.map((art) => (
+                                    <TableRow>
+                                        <TableCell>{art.id}</TableCell>
+                                        <TableCell>{art.title}</TableCell>
+                                        <TableCell>
+                                            <img src={'storage/' + art.path} alt={art.path} className={'h-40 w-full object-cover shadow'} />
+                                        </TableCell>
+                                        <TableCell>{art.description}</TableCell>
+                                        <TableCell>
+                                            <span>{new Date(art.created_at).toLocaleString()}</span>
+                                        </TableCell>
+                                        <TableCell>
+                                            <ul className={'flex gap-2'}>
+                                                <Link href={article.show({ article: art })} className={'hover:underline'}>
+                                                    Voir
+                                                </Link>
+                                                <Link href={article.edit({ article: art })} className={'hover:underline'}>
+                                                    Modifier
+                                                </Link>
+                                                <button
+                                                    onClick={() => router.delete(article.destroy({ article: art }))}
+                                                    className={'hover:underline'}
+                                                >
+                                                    Supprimer
+                                                </button>
+                                            </ul>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                                <TableRow></TableRow>
+                            </TableBody>
+                        </Table>
+                        <PaginatedButton pages={articles}/>
+                    </>
                 ) : (
                     <p>Aucun articles disponibles</p>
                 )}

@@ -3,50 +3,64 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\UpdateMessageRequest;
+use App\Mail\MessageReceiveEmail;
+use App\Mail\MessageSendMail;
 use App\Models\Message;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class MessageController extends Controller
 {
-
     public function index()
     {
-        $messages = Message::all();
-        return Inertia::render("messages/index", compact("messages"));
+        $this->authorize('viewAny', Message::class);
+
+        $messages = Message::orderBy('created_at', 'desc')->paginate(15);
+
+        return Inertia::render('messages/index', compact('messages'));
     }
 
-    public function create() {
+    public function create()
+    {
         return Inertia::render('messages/contact');
     }
 
     public function store(StoreMessageRequest $request)
     {
         $data = $request->validated();
-        Message::create($data);
-        return Inertia::render('messages/contact');
+        $message = Message::create($data);
+
+        Mail::to($data['email'])->send(new MessageSendMail());
+        Mail::to('florian.graziani@sfr.fr')->send(new MessageReceiveEmail($message));
+
+        return redirect()->route('contact.create')->with('success', 'Votre message a été envoyé avec succès !');
     }
 
     public function show(Message $message)
     {
-        return $message;
+        $this->authorize('view', $message);
+
+        dd($message->all());
+
+//        return $message;
     }
 
-    public function update(Request $request, Message $message)
+    public function update(UpdateMessageRequest $request, Message $message)
     {
-        $data = $request->validate([
-
-        ]);
+        $data = $request->validated();
 
         $message->update($data);
 
-        return $message;
+        return redirect()->route('contact.index')->with('success', 'Message mis à jour avec succès.');
     }
 
     public function destroy(Message $message)
     {
+        $this->authorize('delete', $message);
+
         $message->delete();
 
-        return response()->json();
+        return redirect()->route('contact.index')->with('success', 'Message supprimé avec succès.');
     }
 }

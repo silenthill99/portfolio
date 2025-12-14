@@ -4,14 +4,13 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StageController;
 use App\Models\Article;
-use App\Models\Message;
 use App\Models\Stage;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $articles = Article::all();
-    $stages = Stage::orderBy('id', 'desc')->get();
+    $articles = Article::paginate(9);
+    $stages = Stage::orderBy('id', 'desc')->limit(5)->get();
 
     return Inertia::render('welcome', [
         'articles' => $articles,
@@ -21,26 +20,23 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', function () {
-        $list = Article::all();
+        $list = Article::paginate(10);
 
         return Inertia::render('dashboard', ['articles' => $list]);
     })->name('dashboard');
 });
 
+// Routes publiques pour le formulaire de contact (AVANT la resource)
+Route::get('/contact/create', [MessageController::class, 'create'])->name('contact.create');
+Route::post('/contact', [MessageController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+
 Route::middleware(['auth'])->group(function () {
     Route::resource('articles', ArticleController::class)->except(['index', 'show']);
     Route::resource('/stage', StageController::class);
+    Route::resource('/contact', MessageController::class)->except(['create', 'store']);
 });
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
-
-Route::get('/contact/create', [MessageController::class, 'create'])->name('contact.create');
-Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
-Route::get("/contact", [MessageController::class, 'index'])->name('contact.index');
-
-Route::get("/test", function () {
-    dd("Test");
-})->can("view-any", Stage::class);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

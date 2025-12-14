@@ -48,6 +48,7 @@
         "concurrently": "^9.2.1",
         "embla-carousel-react": "^8.6.0",
         "globals": "^16.5.0",
+        "html-entities": "^2.6.0",
         "laravel-vite-plugin": "^2.0",
         "lucide-react": "^0.560.0",
         "react": "^19.2.1",
