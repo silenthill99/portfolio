@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Models\Stage;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -14,15 +14,8 @@ class HomeController extends Controller
         $articles = Article::with('user')->paginate(9);
         $stages = Stage::with('user')->orderBy('id', 'desc')->limit(5)->get();
 
-        // Transform articles to include image_url
-        $articles->getCollection()->transform(function ($article) {
-            $article->image_url = $article->path ? Storage::url($article->path) : null;
-
-            return $article;
-        });
-
         return Inertia::render('welcome', [
-            'articles' => $articles,
+            'articles' => ArticleResource::collection($articles),
             'stages' => $stages,
         ])->withViewData([
             'title' => 'Portfolio - Mes projets',

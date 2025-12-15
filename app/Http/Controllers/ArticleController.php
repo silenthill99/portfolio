@@ -78,7 +78,7 @@ class ArticleController extends Controller
         $article->load('user');
 
         return Inertia::render('articles/show', [
-            'article' => $article,
+            'article' => new ArticleResource($article),
             'images' => Inertia::defer(fn () => $this->getArticleImages($article)),
         ])->withViewData([
             'title' => $article->title.' - Portfolio',

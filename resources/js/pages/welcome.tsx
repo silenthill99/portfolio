@@ -72,7 +72,7 @@ export default function Welcome() {
                         </figure>
                     ))}
                 </div>
-                <div className={"flex justify-center mt-10"}>
+                <div className={"my-10"}>
                     <PaginatedButton pages={articles} />
                 </div>
             </main>
