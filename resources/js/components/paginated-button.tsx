@@ -10,12 +10,15 @@ type Props = {
 
 const PaginatedButton = ({pages}: Props) => {
     return (
-        <div>
-            {pages.meta.links.map((page, index) => (
-                <Button key={index} disabled={page.active || !page.url} onClick={() => router.visit(page.url || '')}>
-                    {decode(page.label)}
-                </Button>
-            ))}
+        <div className={"flex items-center justify-between"}>
+            <p>Affichage des résultats {pages.meta.from} à {pages.meta.to} sur {pages.meta.total}</p>
+            <div>
+                {pages.meta.links.map((page, index) => (
+                    <Button key={index} disabled={page.active || !page.url} onClick={() => router.visit(page.url || '')}>
+                        {decode(page.label)}
+                    </Button>
+                ))}
+            </div>
         </div>
     );
 };
