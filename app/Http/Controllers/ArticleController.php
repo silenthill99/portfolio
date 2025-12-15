@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use App\Services\FileService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ArticleController extends Controller
 {
+    public function __construct(private FileService $fileService) {}
+
     public function create()
     {
         return Inertia::render('articles/create');
@@ -23,8 +27,7 @@ class ArticleController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $data['path'] = $image->storeAs('images', $imageName, 'public');
+            $data['path'] = $this->fileService->storeImage($image);
         }
 
         Auth::user()->articles()->create($data);
@@ -47,11 +50,10 @@ class ArticleController extends Controller
 
         if ($request->hasFile('image')) {
             if ($article->path) {
-                $this->deleteFile($article->path);
+                $this->fileService->deleteImage($article->path);
             }
             $image = $request->file('image');
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $validated['path'] = $image->storeAs('images', $imageName, 'public');
+            $validated['path'] = $this->fileService->storeImage($image);
         }
 
         $article->update($validated);
@@ -64,7 +66,7 @@ class ArticleController extends Controller
         $this->authorize('delete', $article);
 
         if ($article->path) {
-            $this->deleteFile($article->path);
+            $this->fileService->deleteImage($article->path);
         }
         $article->delete();
 
@@ -73,28 +75,30 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-
-        $path = public_path('images/'.$article->title);
-        $images = [];
-
-        if (File::exists($path)) {
-            $imageFiles = File::files($path);
-
-            $images = collect($imageFiles)->map(function ($file) use ($article) {
-                return '/images/'.$article->title.'/'.$file->getFilename();
-            });
-        }
+        $article->load('user');
 
         return Inertia::render('articles/show', [
             'article' => $article,
-            'images' => $images,
+            'images' => Inertia::defer(fn () => $this->getArticleImages($article)),
+        ])->withViewData([
+            'title' => $article->title.' - Portfolio',
+            'description' => Str::limit($article->description, 160),
         ]);
     }
 
-    public function deleteFile(string $file)
+    private function getArticleImages(Article $article): array
     {
-        if (Storage::disk('public')->exists($file)) {
-            Storage::disk('public')->delete($file);
+        $images = [];
+        $path = public_path('images/'.$article->title);
+
+        if (file_exists($path) && is_dir($path)) {
+            $imageFiles = array_diff(scandir($path), ['.', '..']);
+
+            $images = collect($imageFiles)->map(function ($file) use ($article) {
+                return '/images/'.$article->title.'/'.$file;
+            })->values()->toArray();
         }
+
+        return $images;
     }
 }

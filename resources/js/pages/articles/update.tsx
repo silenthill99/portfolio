@@ -21,44 +21,28 @@ const Update = () => {
         <div className={'flex flex-col items-center justify-center bg-white'}>
             <h1>Modifier un article</h1>
             <Head title={'Modifier'} />
-            <Form {...update.form({ article: article })} resetOnSuccess={true}>
+            <Form {...update.form({ article: article })} resetOnSuccess={true} className={'my-5 w-90.5 border p-2'}>
                 {({ errors }) => (
                     <div className={'space-y-4'}>
                         <div>
                             <Label htmlFor={'title'}>Titre</Label>
                             <Input id={'title'} name={'title'} placeholder={'Insérez un titre'} defaultValue={article.title} />
-                            {errors.title && (
-                                <InputError message={errors.title}/>
-                            )}
+                            {errors.title && <InputError message={errors.title} />}
                         </div>
                         <div>
-                            <Label htmlFor={"link"}>Lien</Label>
-                            <Input
-                                id={"link"}
-                                name={'link'}
-                                placeholder={'Insérez un lien'}
-                                defaultValue={article.link}
-                            />
-                            {errors.link && (
-                                <InputError message={errors.link}/>
-                            )}
+                            <Label htmlFor={'link'}>Lien</Label>
+                            <Input id={'link'} name={'link'} placeholder={'Insérez un lien'} defaultValue={article.link} />
+                            {errors.link && <InputError message={errors.link} />}
                         </div>
                         <div>
-                            <Label htmlFor={"github"}>Lien github</Label>
-                            <Input
-                                id={"github"}
-                                name={'github'}
-                                placeholder={'GitHub du projet'}
-                                defaultValue={article.github}
-                            />
-                            {errors.github && (
-                                <InputError message={errors.github}/>
-                            )}
+                            <Label htmlFor={'github'}>Lien github</Label>
+                            <Input id={'github'} name={'github'} placeholder={'GitHub du projet'} defaultValue={article.github} />
+                            {errors.github && <InputError message={errors.github} />}
                         </div>
                         <div>
-                            <Label htmlFor={"image"}>Image</Label>
+                            <Label htmlFor={'image'}>Image</Label>
                             <Input
-                                id={"image"}
+                                id={'image'}
                                 name={'image'}
                                 type={'file'}
                                 accept={'image/*'}
@@ -69,22 +53,18 @@ const Update = () => {
                                     }
                                 }}
                             />
-                            {errors.image && (
-                                <InputError message={errors.image}/>
-                            )}
+                            {errors.image && <InputError message={errors.image} />}
                         </div>
                         {preview && <img src={preview} alt={'Preview'} className={'w-full rounded-md'} />}
                         <div>
-                            <Label htmlFor={"description"}>Description du projet</Label>
+                            <Label htmlFor={'description'}>Description du projet</Label>
                             <Textarea
-                                id={"description"}
-                                name={"description"}
+                                id={'description'}
+                                name={'description'}
                                 className={'min-h-100 w-full resize-none border'}
                                 defaultValue={article.description}
                             ></Textarea>
-                            {errors.description && (
-                                <InputError message={errors.description}/>
-                            )}
+                            {errors.description && <InputError message={errors.description} />}
                         </div>
                         <Button type={'submit'}>Valider</Button>
                     </div>

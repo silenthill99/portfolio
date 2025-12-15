@@ -4,7 +4,7 @@ import { Article } from '@/types';
 import { home } from '@/routes';
 
 const Show = () => {
-    const { article, images } = usePage<{article: Article, images: string[]}>().props;
+    const { article, images } = usePage<{article: Article, images?: string[]}>().props;
     return (
         <>
             <Head title={article.title} />
@@ -13,9 +13,9 @@ const Show = () => {
                 <Carousel className={"lg:w-1/2 w-3/4 mx-auto lg:mx-0"}>
                     <CarouselContent>
                         <CarouselItem>
-                            <img src={`/storage/${article.path}`} alt="" className={"w-full h-full object-cover"}/>
+                            <img src={`/storage/${article.path}`} alt={article.title} className={"w-full h-full object-cover"}/>
                         </CarouselItem>
-                        {images.length > 0 && (
+                        {images && images.length > 0 && (
                             images.map((image, index) => (
                                 <CarouselItem key={index}>
                                     <img src={image} alt={`Image ${index + 1}`} className={"w-full h-full object-cover"}/>

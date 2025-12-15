@@ -28,7 +28,7 @@ class StoreArticleRequest extends FormRequest
             'title' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'github' => 'required|string|max:255',
-            'image' => 'nullable|image|max:8000',
+            'image' => 'nullable|image|max:8000|mimes:jpg,jpeg,png,webp',
             'description' => 'required|string',
         ];
     }

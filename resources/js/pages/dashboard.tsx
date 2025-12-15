@@ -15,6 +15,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard() {
     const { articles } = usePage<{ articles: PaginatedProps<Article> }>().props;
+
+    console.log("articles : ", articles)
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -43,11 +46,11 @@ export default function Dashboard() {
                             </TableHeader>
                             <TableBody>
                                 {articles.data.map((art) => (
-                                    <TableRow>
+                                    <TableRow key={art.id}>
                                         <TableCell>{art.id}</TableCell>
                                         <TableCell>{art.title}</TableCell>
                                         <TableCell>
-                                            <img src={'storage/' + art.path} alt={art.path} className={'h-40 w-full object-cover shadow'} />
+                                            {art.path && <img src={'storage/' + art.path} alt={art.path} className={'h-40 w-full object-cover shadow'} />}
                                         </TableCell>
                                         <TableCell>{art.description}</TableCell>
                                         <TableCell>

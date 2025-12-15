@@ -1,84 +1,54 @@
-import React, { FormEvent, useState } from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import React, { useState } from 'react';
+import { Form, Head } from '@inertiajs/react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import ArticleController from '@/actions/App/Http/Controllers/ArticleController';
-
-type FormData = {
-    title: string,
-    link: string,
-    github: string,
-    image: File | null,
-    description: string
-}
 const Create = () => {
-
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        post(ArticleController.store().url, {
-            forceFormData: true,
-            onFinish: ()=> reset()
-        })
-    }
 
     const [preview, setPreview] = useState<string | null>(null)
 
-    const { data, setData, post, reset } = useForm<Required<FormData>>({
-        title: '',
-        link: '',
-        github: '',
-        image: null as File | null,
-        description: ''
-    })
 
     return (
         <div className={"min-h-screen flex flex-col items-center justify-center mx-auto bg-white"}>
             <h1>Ajouter un site web</h1>
             <Head title={"Créer un article"}/>
-            <form action="" method={"post"} encType={"multipart/form-data"} className={"border p-2 w-90.5 my-5"} onSubmit={handleSubmit}>
-                <Label>Titre</Label>
+            <Form className={"border p-2 w-90.5 my-5"} {...ArticleController.store.form()}>
+                <Label htmlFor={"title"}>Titre</Label>
                 <Input
+                    id={"title"}
                     name={"title"}
                     placeholder={"Insérez un titre"}
-                    value={data.title}
-                    onChange={(e) => setData('title', e.target.value)}
-                    required
                 />
                 <br/>
 
-                <Label>Lien</Label>
+                <Label htmlFor={"link"}>Lien</Label>
                 <Input
+                    id={"link"}
                     name={"link"}
                     placeholder={"Insérez un lien"}
-                    value={data.link}
-                    onChange={(e) => setData("link", e.target.value)}
-                    required
                 />
                 <br/>
-                <Label>Lien github</Label>
+                <Label htmlFor={"github"}>Lien github</Label>
                 <Input
+                    id={"github"}
                     name={"github"}
                     placeholder={"GitHub du projet"}
-                    value={data.github}
-                    onChange={(e) => setData("github", e.target.value)}
-                    required
                 />
                 <br/>
-                <Label>Image</Label>
+                <Label htmlFor={"image"}>Image</Label>
                 <Input
+                    id={"image"}
                     name={"image"}
                     type={"file"}
                     accept={"image/*"}
                     onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                            setData('image', file);
                             setPreview(URL.createObjectURL(file))
                         }
                     }}
-                    required
                 />
                 <br/>
                 {preview && (
@@ -87,17 +57,16 @@ const Create = () => {
                         <br/>
                     </>
                 )}
-                <Label>Description du projet</Label><br/>
+                <Label htmlFor={"description"}>Description du projet</Label><br/>
                 <Textarea
                     className={"border resize-none w-full min-h-100"}
-                    value={data.description}
-                    onChange={(e) => setData("description", e.target.value)}
-                    required
+                    name={"description"}
+                    id={"description"}
                 >
                 </Textarea> <br/>
                 <br/>
                 <Button type={"submit"}>Valider</Button>
-            </form>
+            </Form>
         </div>
     );
 };

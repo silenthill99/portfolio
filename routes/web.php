@@ -1,29 +1,16 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StageController;
-use App\Models\Article;
-use App\Models\Stage;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    $articles = Article::with('user')->paginate(9);
-    $stages = Stage::with('user')->orderBy('id', 'desc')->limit(5)->get();
-
-    return Inertia::render('welcome', [
-        'articles' => $articles,
-        'stages' => $stages,
-    ]);
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('dashboard', function () {
-        $list = Article::with('user')->paginate(10);
-
-        return Inertia::render('dashboard', ['articles' => $list]);
-    })->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 });
 
 // Routes publiques pour le formulaire de contact (AVANT la resource)

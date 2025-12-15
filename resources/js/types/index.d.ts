@@ -15,6 +15,7 @@ export type Article = {
     slug: string;
     link: string;
     github: string;
+    image_url: string | null
 };
 
 export type Stage = {
@@ -67,10 +68,25 @@ export interface User {
 export interface PaginatedProps<T> {
     data: T[];
     links: {
-        url: string | null;
-        label: string;
-        active: boolean
-    }[]
+        first: string | null;
+        last: string | null;
+        next: string | null;
+        prev: string | null;
+    };
+    meta: {
+        current_page: number;
+        from: number;
+        last_page: number;
+        links: {
+            url: string | null;
+            label: string;
+            active: boolean;
+        }[];
+        path: string;
+        per_page: number;
+        to: number;
+        total: number;
+    };
 }
 
 export interface Message {

@@ -11,7 +11,7 @@ type Props = {
 const PaginatedButton = ({pages}: Props) => {
     return (
         <div>
-            {pages.links.map((page, index) => (
+            {pages.meta.links.map((page, index) => (
                 <Button key={index} disabled={page.active || !page.url} onClick={() => router.visit(page.url || '')}>
                     {decode(page.label)}
                 </Button>
