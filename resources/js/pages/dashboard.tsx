@@ -16,8 +16,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Dashboard() {
     const { articles } = usePage<{ articles: PaginatedProps<Article> }>().props;
 
-    console.log("articles : ", articles)
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />

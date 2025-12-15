@@ -19,7 +19,7 @@ Route::post('/messages', [MessageController::class, 'store'])->middleware('throt
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('articles', ArticleController::class)->except(['index', 'show']);
-    Route::resource('/stage', StageController::class);
+    Route::resource('/stage', StageController::class)->except('show');
     Route::resource('/messages', MessageController::class)->except(['create', 'store']);
 });
 

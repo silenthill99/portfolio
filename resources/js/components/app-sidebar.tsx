@@ -4,9 +4,10 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, HomeIcon, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, HomeIcon, LayoutGrid, MessageCircleIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 import { dashboard, home } from '@/routes';
+import messages from '@/routes/messages';
 
 const mainNavItems: NavItem[] = [
     {
@@ -22,6 +23,11 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Stages',
         href: '/stage'
+    },
+    {
+        title: "Messages",
+        href: messages.index().url,
+        icon: MessageCircleIcon
     }
 ];
 

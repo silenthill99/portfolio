@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use App\Http\Resources\MessageResource;
 use App\Mail\MessageReceiveEmail;
 use App\Mail\MessageSendMail;
 use App\Models\Message;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
@@ -18,7 +20,7 @@ class MessageController extends Controller
 
         $messages = Message::orderBy('created_at', 'desc')->paginate(15);
 
-        return Inertia::render('messages/index', compact('messages'));
+        return Inertia::render('messages/index', ['messages' => MessageResource::collection($messages)]);
     }
 
     public function create()
@@ -31,8 +33,18 @@ class MessageController extends Controller
         $data = $request->validated();
         $message = Message::create($data);
 
-        Mail::to($data['email'])->send(new MessageSendMail());
-        Mail::to('florian.graziani@sfr.fr')->send(new MessageReceiveEmail($message));
+        try {
+            Mail::to($data['email'])->send(new MessageSendMail);
+            Mail::to(config('mail.admin'))->send(new MessageReceiveEmail($message));
+        } catch (\Exception $e) {
+            Log::error('Failed to send message emails', [
+                'message_id' => $message->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return redirect()->route('messages.create')
+                ->with('success', 'Votre message a été reçu, mais l\'envoi de la confirmation par email a échoué.');
+        }
 
         return redirect()->route('messages.create')->with('success', 'Votre message a été envoyé avec succès !');
     }

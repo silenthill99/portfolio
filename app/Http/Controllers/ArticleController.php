@@ -8,7 +8,6 @@ use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Services\FileService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -89,14 +88,16 @@ class ArticleController extends Controller
     private function getArticleImages(Article $article): array
     {
         $images = [];
-        $path = public_path('images/'.$article->title);
+        $directory = 'images/'.$article->title;
+        $path = public_path($directory);
 
-        if (file_exists($path) && is_dir($path)) {
-            $imageFiles = array_diff(scandir($path), ['.', '..']);
+        if (is_dir($path)) {
+            $files = glob($path.'/*');
 
-            $images = collect($imageFiles)->map(function ($file) use ($article) {
-                return '/images/'.$article->title.'/'.$file;
-            })->values()->toArray();
+            $images = collect($files)
+                ->map(fn ($file) => '/'.$directory.'/'.basename($file))
+                ->values()
+                ->toArray();
         }
 
         return $images;

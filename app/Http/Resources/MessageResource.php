@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StageResource extends JsonResource
+class MessageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,10 @@ class StageResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'title' => $this->resource->title,
-            'entreprise' => $this->resource->entreprise,
-            'competences' => $this->resource->competences,
-            'start_at' => $this->resource->start_at,
-            'end_at' => $this->resource->end_at,
-            'user' => new UserResource($this->whenLoaded('user')),
+            'pseudo' => $this->resource->pseudo,
+            'email' => $this->resource->email,
+            'subject' => $this->resource->subject,
+            'message' => $this->resource->message,
             'created_at' => $this->resource->created_at?->format('Y-m-d'),
             'created_at_human' => $this->resource->created_at?->diffForHumans(),
         ];

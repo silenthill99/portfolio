@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStageRequest;
 use App\Http\Requests\UpdateStageRequest;
+use App\Http\Resources\StageResource;
 use App\Models\Stage;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -12,10 +13,11 @@ class StageController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Stage::class);
         $stages = Stage::orderBy('start_at', 'desc')->paginate(15);
 
         return Inertia::render('stages/index', [
-            'stages' => $stages,
+            'stages' => StageResource::collection($stages),
         ]);
     }
 
@@ -31,11 +33,6 @@ class StageController extends Controller
         Auth::user()->stages()->create($data);
 
         return redirect()->route('stage.index');
-    }
-
-    public function show(Stage $stage)
-    {
-        return $stage;
     }
 
     public function update(UpdateStageRequest $request, Stage $stage)
@@ -61,7 +58,7 @@ class StageController extends Controller
         $this->authorize('update', $stage);
 
         return Inertia::render('stages/edit', [
-            'stage' => $stage,
+            'stage' => new StageResource($stage),
         ]);
     }
 }

@@ -2,13 +2,10 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Article } from '@/types';
 import { home } from '@/routes';
-import { useEffect } from 'react';
 
 const Show = () => {
     const { article, images } = usePage<{article: Article, images?: string[]}>().props;
-    useEffect(() => {
-        console.log(article);
-    }, []);
+
     return (
         <>
             <Head title={article.title} />
