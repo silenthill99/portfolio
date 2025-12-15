@@ -4,7 +4,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { Message, PaginatedProps } from '@/types';
 import PaginatedButton from '@/components/paginated-button';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { show } from '@/actions/App/Http/Controllers/MessageController';
+import MessageController from '@/actions/App/Http/Controllers/MessageController';
 
 const Index = () => {
     const {messages} = usePage<{messages: PaginatedProps<Message>}>().props;
@@ -12,7 +12,7 @@ const Index = () => {
         <AppLayout>
             <div className={'m-2 grid gap-2 md:grid-cols-3'}>
                 {messages.data.map((message) => (
-                    <Link href={show({message: message})} key={message.id}>
+                    <Link href={MessageController.show({message: message})} key={message.id}>
                         <Card>
                             <CardHeader>
                                 <CardTitle>{message.subject}</CardTitle>
