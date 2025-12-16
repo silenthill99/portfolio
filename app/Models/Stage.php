@@ -10,13 +10,13 @@ class Stage extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
-        //Titre de la fonction exercée
-        "title",
-        "entreprise",
-        "competences",
-        "start_at",
-        "end_at",
+    protected $fillable = [
+        // Titre de la fonction exercée
+        'title',
+        'entreprise',
+        'competences',
+        'start_at',
+        'end_at',
     ];
 
     public function user(): BelongsTo

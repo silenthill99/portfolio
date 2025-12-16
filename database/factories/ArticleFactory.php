@@ -18,15 +18,15 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::factory(),
-            "title" => $this->faker->sentence(),
-            "slug" => $this->faker->slug(),
-            "link" => $this->faker->url(),
-            "github" => $this->faker->url(),
-            "path" => $this->faker->url(),
-            "description" => $this->faker->text(),
-            "created_at" => $this->faker->dateTime(),
-            "updated_at" => $this->faker->dateTime()
+            'user_id' => User::factory(),
+            'title' => $this->faker->sentence(),
+            'slug' => $this->faker->slug(),
+            'link' => $this->faker->url(),
+            'github' => $this->faker->url(),
+            'path' => $this->faker->url(),
+            'description' => $this->faker->text(),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
         ];
     }
 }

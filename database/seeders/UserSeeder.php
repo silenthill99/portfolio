@@ -13,13 +13,13 @@ class UserSeeder extends Seeder
         DB::table('users')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         DB::table('users')->insert([
-            'name' => "Florian GRAZIANI",
-            "email" => 'florian.graziani@sfr.fr',
+            'name' => 'Florian GRAZIANI',
+            'email' => 'florian.graziani@sfr.fr',
             'email_verified_at' => now(),
-            'password' => bcrypt("Mylene.10"),
-            'remember_token' =>  NULL,
+            'password' => bcrypt('Mylene.10'),
+            'remember_token' => null,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }

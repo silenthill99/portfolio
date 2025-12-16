@@ -32,7 +32,7 @@ class StageController extends Controller
 
         Auth::user()->stages()->create($data);
 
-        return redirect()->route('stage.index');
+        return redirect()->route('stages.index');
     }
 
     public function update(UpdateStageRequest $request, Stage $stage)
@@ -41,7 +41,7 @@ class StageController extends Controller
 
         $stage->update($data);
 
-        return redirect(route('stage.show', $stage));
+        return redirect(route('stages.index'));
     }
 
     public function destroy(Stage $stage)
@@ -50,7 +50,7 @@ class StageController extends Controller
 
         $stage->delete();
 
-        return redirect(route('stage.index'));
+        return redirect(route('stages.index'));
     }
 
     public function edit(Stage $stage)

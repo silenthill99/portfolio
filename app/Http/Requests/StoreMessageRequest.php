@@ -24,9 +24,9 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'pseudo' => 'required|string|max:255',
-            'email' => "required|email",
-            'subject' => "required|string|max:255",
-            'message' => "required|string"
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
         ];
     }
 }

@@ -6,7 +6,7 @@ use App\Models\User;
 test('authenticated users can create stage', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->post('/stage', [
+    $response = $this->actingAs($user)->post('/stages', [
         'title' => 'Stage Développeur',
         'entreprise' => 'Tech Corp',
         'competences' => 'Laravel, React, MySQL',
@@ -22,7 +22,7 @@ test('authenticated users can create stage', function () {
 });
 
 test('guest can\'t create stage', function () {
-    $response = $this->post('/stage', [
+    $response = $this->post('/stages', [
         'title' => 'Stage Développeur',
         'entreprise' => 'Tech Corp',
         'competences' => 'Laravel, React, MySQL',
@@ -37,7 +37,7 @@ test('authenticated users can update their own stages', function () {
     $user = User::factory()->create();
     $stage = Stage::factory()->create(['user_id' => $user->id]);
 
-    $response = $this->actingAs($user)->patch("/stage/{$stage->id}", [
+    $response = $this->actingAs($user)->patch("/stages/{$stage->id}", [
         'title' => 'Stage Développeur Senior',
         'entreprise' => 'New Tech Corp',
         'competences' => 'Laravel, React, MySQL, Docker',
@@ -57,7 +57,7 @@ test('users can\'t update stages from others', function () {
     $owner = User::factory()->create();
     $stage = Stage::factory()->create(['user_id' => $owner->id]);
 
-    $response = $this->actingAs($user)->patch("/stage/{$stage->id}", [
+    $response = $this->actingAs($user)->patch("/stages/{$stage->id}", [
         'title' => 'Unauthorized Update',
         'entreprise' => 'Evil Corp',
         'competences' => 'Hacking',
@@ -75,7 +75,7 @@ test('users can\'t update stages from others', function () {
 test('guests can\'t update stages', function () {
     $stage = Stage::factory()->create();
 
-    $response = $this->patch("/stage/{$stage->id}", [
+    $response = $this->patch("/stages/{$stage->id}", [
         'title' => 'Unauthorized Guest Update',
         'entreprise' => 'Evil Corp',
         'competences' => 'Hacking',
@@ -94,7 +94,7 @@ test('authenticated users can delete their own stages', function () {
     $user = User::factory()->create();
     $stage = Stage::factory()->create(['user_id' => $user->id]);
 
-    $response = $this->actingAs($user)->delete("/stage/{$stage->id}");
+    $response = $this->actingAs($user)->delete("/stages/{$stage->id}");
 
     $response->assertRedirect();
     $this->assertDatabaseMissing('stages', [
@@ -107,7 +107,7 @@ test('users can\'t delete stages from others', function () {
     $owner = User::factory()->create();
     $stage = Stage::factory()->create(['user_id' => $owner->id]);
 
-    $response = $this->actingAs($user)->delete("/stage/{$stage->id}");
+    $response = $this->actingAs($user)->delete("/stages/{$stage->id}");
 
     $response->assertForbidden();
     $this->assertDatabaseHas('stages', [
@@ -118,7 +118,7 @@ test('users can\'t delete stages from others', function () {
 test('guests can\'t delete stages', function () {
     $stage = Stage::factory()->create();
 
-    $response = $this->delete("/stage/{$stage->id}");
+    $response = $this->delete("/stages/{$stage->id}");
 
     $response->assertRedirect(route('login'));
     $this->assertDatabaseHas('stages', [
@@ -130,7 +130,7 @@ test('authenticated users can view stages index', function () {
     $user = User::factory()->create();
     Stage::factory()->count(3)->create(['user_id' => $user->id]);
 
-    $response = $this->actingAs($user)->get('/stage');
+    $response = $this->actingAs($user)->get('/stages');
 
     $response->assertSuccessful();
 });

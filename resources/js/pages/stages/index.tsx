@@ -1,7 +1,7 @@
 import React from 'react';
 import AppLayout from '@/layouts/app-layout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import type { BreadcrumbItem, Stage } from '@/types';
+import type { BreadcrumbItem, PaginatedProps, Stage } from '@/types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { create, destroy, edit } from '@/actions/App/Http/Controllers/StageController';
 
@@ -14,7 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 
 const Index = () => {
-    const { stages } = usePage<{stages: Stage[]}>().props;
+    const { stages } = usePage<{stages: PaginatedProps<Stage>}>().props;
 
     function handleDelete(id: number) {
         if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
@@ -26,7 +26,7 @@ const Index = () => {
             <Head title="Stages"/>
             <div className={"p-5"}>
                 <Link href={create()} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
-                {stages.length > 0 ? (
+                {stages.data.length > 0 ? (
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -40,7 +40,7 @@ const Index = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {stages.map((stage) => (
+                            {stages.data.map((stage) => (
                                 <TableRow key={stage.id}>
                                     <TableCell>{stage.id}</TableCell>
                                     <TableCell>{stage.title}</TableCell>

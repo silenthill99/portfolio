@@ -27,9 +27,9 @@ class CreateAdmin extends Command
     public function handle()
     {
         User::create([
-            "email" => "florian.graziani@sfr.fr",
-            "name" => "Florian Graziani",
-            "password" => bcrypt("Mylene.10"),
+            'email' => 'florian.graziani@sfr.fr',
+            'name' => 'Florian Graziani',
+            'password' => bcrypt('Mylene.10'),
         ]);
     }
 }

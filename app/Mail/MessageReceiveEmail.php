@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Message;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -18,7 +17,6 @@ class MessageReceiveEmail extends Mailable
 
     /**
      * Create a new message instance.
-     * @param Message $message
      */
     public function __construct(Message $message)
     {
@@ -44,7 +42,7 @@ class MessageReceiveEmail extends Mailable
         return new Content(
             markdown: 'mail.message-receive-email',
             with: [
-                'message' => $this->message
+                'message' => $this->message,
             ]
         );
     }

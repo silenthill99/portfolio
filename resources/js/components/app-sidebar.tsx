@@ -8,6 +8,7 @@ import { BookOpen, Folder, HomeIcon, LayoutGrid, MessageCircleIcon } from 'lucid
 import AppLogo from './app-logo';
 import { dashboard, home } from '@/routes';
 import messages from '@/routes/messages';
+import stages from '@/routes/stages';
 
 const mainNavItems: NavItem[] = [
     {
@@ -22,7 +23,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Stages',
-        href: '/stage'
+        href: stages.index().url
     },
     {
         title: "Messages",
