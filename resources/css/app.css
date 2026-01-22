@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import 'flowbite-react/plugin/tailwindcss';
+@source '../../.flowbite-react/class-list.json';
 
 @plugin 'tailwindcss-animate';
 
@@ -93,6 +95,10 @@
 
     h2 {
         @apply lg:text-3xl font-semibold py-5 leading-tight;
+    }
+
+    h3 {
+        @apply text-2xl font-semibold my-4;
     }
 
     button {

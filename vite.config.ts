@@ -4,20 +4,16 @@ import laravel from 'laravel-vite-plugin';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
+import flowbiteReact from "flowbite-react/plugin/vite";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            ssr: 'resources/js/ssr.tsx',
-            refresh: true,
-        }),
-        react(),
-        tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        })
-    ],
+    plugins: [laravel({
+        input: ['resources/css/app.css', 'resources/js/app.tsx'],
+        ssr: 'resources/js/ssr.tsx',
+        refresh: true,
+    }), react(), tailwindcss(), wayfinder({
+        formVariants: true,
+    }), flowbiteReact()],
     esbuild: {
         jsx: 'automatic',
     },

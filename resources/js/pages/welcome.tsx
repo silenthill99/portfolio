@@ -1,11 +1,13 @@
-import { Article, PaginatedProps, type SharedData } from '@/types';
+import { Article, PaginatedProps, type SharedData, Stage } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { show } from '@/actions/App/Http/Controllers/ArticleController';
 import PaginatedButton from '@/components/paginated-button';
 import HeroSection from '@/components/hero-section';
+import { Timeline, TimelineContent, TimelineItem, TimelinePoint, TimelineTime, TimelineTitle } from 'flowbite-react';
+import SoundCustom from '@/components/sound-custom';
 
 export default function Welcome() {
-    const { articles } = usePage<SharedData & { articles: PaginatedProps<Article> }>().props;
+    const { articles, stages } = usePage<SharedData & { articles: PaginatedProps<Article>, stages: Stage[] }>().props;
 
     return (
         <div className={'pb-5 text-white'}>
@@ -15,7 +17,8 @@ export default function Welcome() {
             </Head>
             <main>
                 <HeroSection />
-                <div className={"container mx-auto"}>
+                <SoundCustom />
+                <div className={'container mx-auto'}>
                     <h2 className={'py-20 text-4xl font-semibold uppercase'}>Liste des projets</h2>
                     <div className={'grid gap-10 p-10 md:grid-cols-2 lg:grid-cols-3 lg:p-0'}>
                         {articles.data.map((article) => (
@@ -30,10 +33,31 @@ export default function Welcome() {
                             </figure>
                         ))}
                     </div>
+                    <PaginatedButton pages={articles} className="my-5" />
                 </div>
-                <div className={'my-10'}>
-                    <PaginatedButton pages={articles} />
-                </div>
+                <section className={'container mx-auto'}>
+                    <h2>Expériences professionnelles</h2>
+                    <h3>Stages</h3>
+                    <Timeline horizontal>
+                        {stages.map((stage) => (
+                            <TimelineItem key={stage.id}>
+                                <TimelinePoint />
+                                <TimelineContent>
+                                    <TimelineTime>{new Date(stage.start_at).toLocaleDateString("fr-FR", {
+                                        day: "2-digit",
+                                        year: "numeric",
+                                        month: "long"
+                                    })} {stage.end_at && (" - " + new Date(stage.end_at).toLocaleDateString("fr-FR", {
+                                        day: "2-digit",
+                                        year: "numeric",
+                                        month: "long"
+                                    }))}</TimelineTime>
+                                    <TimelineTitle className={'text-white'}>DevCSI</TimelineTitle>
+                                </TimelineContent>
+                            </TimelineItem>
+                        ))}
+                    </Timeline>
+                </section>
             </main>
         </div>
     );

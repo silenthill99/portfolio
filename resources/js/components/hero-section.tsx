@@ -19,7 +19,7 @@ const HeroSection = () => {
                     Développeur full-stack
                 </p>
                 <p
-                    className="mb-4 text-lg text-muted-foreground animate-fade-in-up"
+                    className="mb-4 text-lg text-white/90 font-medium animate-fade-in-up"
                 >
                     Je crée des applications web modernes avec :
                 </p>
