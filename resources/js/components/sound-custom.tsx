@@ -6,6 +6,10 @@ const SoundCustom = () => {
 
     const audio = useRef<HTMLAudioElement>(null)
 
+    function handlePlay() {
+        audio.current?.play()
+    }
+
     return (
         <div>
             <div>
@@ -14,7 +18,7 @@ const SoundCustom = () => {
             </div>
             <div className={'flex'}>
                 <audio ref={audio} src={'/sounds/KANNA movie version.ogg'} />
-                <LucidePlayCircle width={32} height={32} id={'play-button'} />
+                <LucidePlayCircle width={32} height={32} id={'play-button'} onClick={handlePlay} />
                 <LucidePauseCircle width={32} height={32} className={'hidden'} id={'pause-button'} />
                 <LucideStopCircle width={32} height={32} className={'hidden'} id={'stop-button'} />
             </div>
