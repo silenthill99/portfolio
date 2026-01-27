@@ -25,6 +25,7 @@ export type Stage = {
     competences: string;
     start_at: string;
     end_at: string;
+    objective: string;
 };
 
 

@@ -24,6 +24,7 @@ class StageResource extends JsonResource
             'user' => new UserResource($this->whenLoaded('user')),
             'created_at' => $this->resource->created_at?->format('Y-m-d'),
             'created_at_human' => $this->resource->created_at?->diffForHumans(),
+            'objective' => $this->resource->objective
         ];
     }
 }

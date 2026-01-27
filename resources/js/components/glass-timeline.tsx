@@ -1,5 +1,5 @@
 import { Stage } from '@/types';
-import { Building2, Calendar } from 'lucide-react';
+import { Building2, Calendar, Target } from 'lucide-react';
 
 type Props = {
     stages: Stage[];
@@ -43,7 +43,7 @@ const GlassTimeline = ({ stages }: Props) => {
                                 index % 2 === 0 ? 'md:mr-auto md:pr-8 md:text-right' : 'md:ml-auto md:pl-8'
                             }`}
                         >
-                            <div className="rounded-xl border border-slate-700/50 bg-slate-800/80 p-5 transition-all duration-300 hover:border-slate-600/50 hover:bg-slate-700/80">
+                            <div className="rounded-xl border border-slate-700/50 bg-slate-800/80 p-5 transition-all duration-300 hover:border-slate-600/50 hover:bg-slate-700/80 ">
                                 {/* Date badge */}
                                 <div
                                     className={`mb-3 inline-flex items-center gap-2 text-xs text-slate-400 ${
@@ -63,12 +63,22 @@ const GlassTimeline = ({ stages }: Props) => {
                                 {/* Company */}
                                 <p className="mt-1 text-sm text-slate-300">{stage.entreprise}</p>
 
+                                {/* Objectif */}
+                                {stage.objective && (
+                                    <div className={`mt-3 flex items-start gap-2 ${index % 2 === 0 ? 'md:flex-row-reverse md:text-right' : ''}`}>
+                                        <Target className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                                        <p className="text-sm text-slate-400">{stage.objective}</p>
+                                    </div>
+                                )}
+
                                 {/* Competences */}
                                 {stage.competences && (
                                     <div className={`mt-3 flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                                        <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-xs text-blue-300">
-                                            {stage.competences.replace(/\n+/g, ' • ').trim()}
-                                        </span>
+                                        {stage.competences.split(';').map((competence, index) => (
+                                            <span key={index} className="rounded-full bg-blue-500/10 px-2.5 py-1 text-xs text-blue-300">
+                                                {competence}
+                                            </span>
+                                        ))}
                                     </div>
                                 )}
                             </div>

@@ -27,9 +27,10 @@ class StoreStageRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'entreprise' => 'required|string|max:255',
-            'competences' => 'required|string|max:255',
+            'competences' => 'required|string',
             'start_at' => 'required|date',
             'end_at' => 'nullable|date',
+            'objective' => 'required|string',
         ];
     }
 }

@@ -17,6 +17,7 @@ class Stage extends Model
         'competences',
         'start_at',
         'end_at',
+        'objective'
     ];
 
     public function user(): BelongsTo
