@@ -70,6 +70,9 @@
 
     --animate-fade-in: fade-in 0.8s ease-out backwards;
     --animate-fade-in-up: fade-in-up 0.8s ease-out backwards;
+    --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+    --animate-shimmer: shimmer 2s linear infinite;
+    --animate-float: float 3s ease-in-out infinite;
 }
 
 /*
@@ -263,5 +266,33 @@
     to {
         opacity: 1;
         transform: translate(0);
+    }
+}
+
+/* Glassmorphism animations */
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px oklch(0.7 0.15 200 / 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px oklch(0.7 0.15 200 / 0.5);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
     }
 }
