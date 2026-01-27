@@ -34,6 +34,7 @@ const Index = () => {
                                 <TableHead>Title</TableHead>
                                 <TableHead>Entreprise</TableHead>
                                 <TableHead>Competences</TableHead>
+                                <TableHead>Objectif</TableHead>
                                 <TableHead>Start</TableHead>
                                 <TableHead>End</TableHead>
                                 <TableHead>Actions</TableHead>
@@ -45,6 +46,7 @@ const Index = () => {
                                     <TableCell>{stage.id}</TableCell>
                                     <TableCell>{stage.title}</TableCell>
                                     <TableCell>{stage.entreprise}</TableCell>
+                                    <TableCell>{stage.objective}</TableCell>
                                     <TableCell>{stage.competences}</TableCell>
                                     <TableCell>{new Date(stage.start_at).toLocaleString(navigator.language, {
                                         "day": "numeric",
