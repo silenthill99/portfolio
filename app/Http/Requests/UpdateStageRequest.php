@@ -29,6 +29,7 @@ class UpdateStageRequest extends FormRequest
             'competences' => 'required|string|max:255',
             'start_at' => 'required|date',
             'end_at' => 'nullable|date',
+            'objective' => 'required|string',
         ];
     }
 }
