@@ -77,3 +77,12 @@ Variables d'animation :
 ### Dépendances utilisées
 - `lucide-react` : Icônes (ArrowRight, ArrowLeft, ExternalLink, Github, Target, Home, FolderOpen, Briefcase, Building2, Calendar)
 - `@/components/ui/carousel` : Carousel d'images (Embla)
+
+---
+
+## 2026-01-27 - Corrections mineures
+
+### `components/glass-timeline.tsx`
+- Réorganisation des classes Tailwind (ordre logique)
+- Affichage des compétences dans un badge unique (au lieu de badges séparés par virgule)
+- Nettoyage du formatage du code
