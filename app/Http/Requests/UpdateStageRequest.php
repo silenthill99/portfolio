@@ -24,12 +24,12 @@ class UpdateStageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'entreprise' => 'required|string|max:255',
-            'competences' => 'required|string|max:255',
-            'start_at' => 'required|date',
+            'title' => 'nullable|string|max:255',
+            'entreprise' => 'nullable|string|max:255',
+            'competences' => 'nullable|string',
+            'start_at' => 'nullable|date',
             'end_at' => 'nullable|date',
-            'objective' => 'required|string',
+            'objective' => 'nullable|string',
         ];
     }
 }

@@ -15,7 +15,8 @@ const Edit = () => {
         entreprise: stage.entreprise,
         competences: stage.competences,
         start_at: stage.start_at ? stage.start_at.slice(0, 10) : new Date().toISOString().split('T')[0],
-        end_at: stage.end_at ? stage.end_at.slice(0, 10) : ""
+        end_at: stage.end_at ? stage.end_at.slice(0, 10) : "",
+        objective: stage.objective
     });
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -26,63 +27,74 @@ const Edit = () => {
     }
 
     return (
-        <div className={"min-h-screen flex flex-col items-center justify-center"}>
-            <Head title={"Modifier l'article"}/>
-            <form action={update({stage: stage}).url} method={"PUT"} className={"bg-white w-150 h-150 rounded-2xl p-10"} onSubmit={handleSubmit}>
+        <div className={'flex min-h-screen flex-col items-center justify-center'}>
+            <Head title={"Modifier l'article"} />
+            <form action={update({ stage: stage }).url} method={'PUT'} className={'min-h-150 w-150 rounded-2xl bg-white p-10'} onSubmit={handleSubmit}>
                 <label>Titre du post</label>
                 <input
-                    type={"text"}
-                    name={"title"}
-                    placeholder={"Titre du post"}
+                    type={'text'}
+                    name={'title'}
+                    placeholder={'Titre du post'}
                     value={data.title}
-                    onChange={e => setData("title", e.target.value)}
-                    className={"block w-full border-b my-2 focus:outline-none"}
+                    onChange={(e) => setData('title', e.target.value)}
+                    className={'my-2 block w-full border-b focus:outline-none'}
                     required
-                /><br/>
-
+                />
+                <br />
                 <label>Entreprise</label>
                 <input
                     type="text"
-                    name={"entreprise"}
+                    name={'entreprise'}
                     placeholder={"Nom de l'entreprise"}
-                    className={"block w-full border-b my-2 focus:outline-none"}
+                    className={'my-2 block w-full border-b focus:outline-none'}
                     value={data.entreprise}
-                    onChange={e => {setData("entreprise", e.target.value)}}
+                    onChange={(e) => {
+                        setData('entreprise', e.target.value);
+                    }}
                     required
-                /><br/>
-
-                <div className={"flex justify-between"}>
+                />
+                <br />
+                <div className={'flex justify-between'}>
                     <div>
-                        <label className={"mb-2 block"}>Date de début</label>
+                        <label className={'mb-2 block'}>Date de début</label>
                         <input
                             type="date"
                             name="start_at"
                             id="start_at"
                             value={data.start_at}
-                            onChange={e => {setData("start_at", e.target.value)}}
+                            onChange={(e) => {
+                                setData('start_at', e.target.value);
+                            }}
                             required
                         />
                     </div>
                     <div>
-                        <label className={"mb-2 block"}>Date de fin</label>
+                        <label className={'mb-2 block'}>Date de fin</label>
                         <input
                             type="date"
                             name="end_at"
                             id="end_at"
                             value={data.end_at}
-                            onChange={e => setData("end_at", e.target.value)}
+                            onChange={(e) => setData('end_at', e.target.value)}
                             required
                         />
                     </div>
-                </div> <br/>
+                </div>{' '}
+                <br />
+                <label htmlFor={"objective"}>Objectifs</label>
+                <textarea className={"block h-50 w-full resize-none border"} value={data.objective} onChange={e => setData('objective', e.target.value)}/>
+                <br/>
+                <label htmlFor="competences">Compétences ( à séparer avec un ";" )</label>
                 <textarea
                     name="competences"
                     id="competences"
-                    className={"block resize-none h-50 w-full border"}
+                    className={'block h-50 w-full resize-none border'}
                     value={data.competences}
-                    onChange={e => setData("competences", e.target.value)}
-                    required></textarea> <br/>
-                <Button type={"submit"}>Valider</Button>
+                    onChange={(e) => setData('competences', e.target.value)}
+                    required
+                ></textarea>{' '}
+                <br />
+                <Button type={'submit'}>Valider</Button>
             </form>
         </div>
     );
