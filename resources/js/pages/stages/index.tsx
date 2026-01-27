@@ -23,9 +23,11 @@ const Index = () => {
     }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Stages"/>
-            <div className={"p-5"}>
-                <Link href={create()} className={"bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 inline-block"}>Ajouter un article</Link>
+            <Head title="Stages" />
+            <div className={'p-5'}>
+                <Link href={create()} className={'inline-block rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-700'}>
+                    Ajouter un article
+                </Link>
                 {stages.data.length > 0 ? (
                     <Table>
                         <TableHeader>
@@ -33,8 +35,8 @@ const Index = () => {
                                 <TableHead>ID</TableHead>
                                 <TableHead>Title</TableHead>
                                 <TableHead>Entreprise</TableHead>
-                                <TableHead>Competences</TableHead>
                                 <TableHead>Objectif</TableHead>
+                                <TableHead>Competences</TableHead>
                                 <TableHead>Start</TableHead>
                                 <TableHead>End</TableHead>
                                 <TableHead>Actions</TableHead>
@@ -48,18 +50,22 @@ const Index = () => {
                                     <TableCell>{stage.entreprise}</TableCell>
                                     <TableCell>{stage.objective}</TableCell>
                                     <TableCell>{stage.competences}</TableCell>
-                                    <TableCell>{new Date(stage.start_at).toLocaleString(navigator.language, {
-                                        "day": "numeric",
-                                        "month": "long",
-                                        "year": "numeric"
-                                    })}</TableCell>
-                                    <TableCell>{new Date(stage.end_at).toLocaleString(navigator.language, {
-                                        "day": "numeric",
-                                        "month": "long",
-                                        "year": "numeric"
-                                    })}</TableCell>
-                                    <TableCell className={"space-x-2"}>
-                                        <Link href={edit({stage: stage})}>Modifier</Link>
+                                    <TableCell>
+                                        {new Date(stage.start_at).toLocaleString(navigator.language, {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                        })}
+                                    </TableCell>
+                                    <TableCell>
+                                        {new Date(stage.end_at).toLocaleString(navigator.language, {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                        })}
+                                    </TableCell>
+                                    <TableCell className={'space-x-2'}>
+                                        <Link href={edit({ stage: stage })}>Modifier</Link>
                                         <button onClick={() => handleDelete(stage.id)}>Supprimer</button>
                                     </TableCell>
                                 </TableRow>
@@ -67,7 +73,7 @@ const Index = () => {
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className={"text-red-500"}>Aucun articles dans la BDD</p>
+                    <p className={'text-red-500'}>Aucun articles dans la BDD</p>
                 )}
             </div>
         </AppLayout>
